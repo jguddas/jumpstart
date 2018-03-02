@@ -1,2 +1,7 @@
 #!/usr/bin/env node
-console.log('Hello World!')
+const { spawn } = require('child_process')
+spawn(
+  require.resolve('.bin/webpack-cli'),
+  process.argv.slice(2).concat(['--config', require.resolve('./webpack')]),
+  { stdio: 'inherit' }
+)

@@ -11,5 +11,9 @@
   },
   "keywords": [],
   "author": "Jakob Guddas",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
+  }
 }
