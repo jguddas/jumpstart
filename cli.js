@@ -11,13 +11,15 @@ const run = (command, args, options, dargOpts) =>
 
 const processOpts = { stdio: 'inherit' }
 const webpackOpts = { config: require.resolve('./webpack') }
+const webpackCliOpts = { mode: 'production' }
+const webpackServerOpts = { mode: 'development' }
 
 const argv = minimist(process.argv.slice(3))
 
 if (process.argv[2] === 'webpack-cli') {
-  run('webpack-cli', [webpackOpts, argv], processOpts)
+  run('webpack-cli', [webpackOpts, webpackCliOpts, argv], processOpts)
 } else if (process.argv[2] === 'webpack-dev-server') {
-  run('webpack-dev-server', [webpackOpts, argv], processOpts)
+  run('webpack-dev-server', [webpackOpts, webpackServerOpts, argv], processOpts)
 } else {
   console.log('Invalid command!')
   console.log('$ jumpstart webpack-cli|webpack-dev-server [options]')
