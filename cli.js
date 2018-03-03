@@ -12,4 +12,7 @@ if (process.argv[2] === 'webpack-cli') {
     process.argv.slice(3).concat(['--config', require.resolve('./webpack')]),
     { stdio: 'inherit' }
   )
+} else {
+  console.log('Invalid command!')
+  console.log('$ jumpstart webpack-cli|webpack-dev-server [options]')
 }
