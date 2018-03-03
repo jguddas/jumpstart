@@ -12,7 +12,7 @@ const run = (command, args, options, dargOpts) =>
 const processOpts = { stdio: 'inherit' }
 const webpackOpts = { config: require.resolve('./webpack') }
 const webpackCliOpts = { mode: 'production' }
-const webpackServerOpts = { mode: 'development' }
+const webpackServerOpts = { mode: 'development', quiet: true }
 
 const argv = minimist(process.argv.slice(3))
 
