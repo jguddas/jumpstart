@@ -1,6 +1,6 @@
-module.exports = (opts = {}) => [
-  require.resolve('style-loader'),
-  {
+module.exports = extract => (opts = {}, fallback) => extract({
+  fallback: fallback || require.resolve('style-loader'),
+  use: {
     loader: require.resolve('css-loader'),
     options: {
       importLoaders: 1,
@@ -8,4 +8,4 @@ module.exports = (opts = {}) => [
       ...opts,
     },
   }
-]
+})
