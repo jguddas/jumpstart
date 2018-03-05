@@ -9,7 +9,14 @@ const run = (command, args, options) =>
 
 const argv = minimist(process.argv.slice(3))
 
-const processOpts = { stdio: 'inherit' }
+const jumpstartOpts = { command: process.argv[2], argv }
+const processOpts = {
+  stdio: 'inherit',
+  env: {
+    ...process.env,
+    JUMPSTART: JSON.stringify(jumpstartOpts),
+  }
+}
 const webpackCliOpts = {
   mode: 'production',
   ...argv,
