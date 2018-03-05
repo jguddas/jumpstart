@@ -9,21 +9,33 @@ const run = (command, args, options) =>
 
 const argv = minimist(process.argv.slice(3))
 
-const jumpstartOpts = { command: process.argv[2], argv }
-const processOpts = {
+const webpackCliOpts = {
   stdio: 'inherit',
   env: {
     ...process.env,
-    JUMPSTART: JSON.stringify(jumpstartOpts),
+    JUMPSTART: JSON.stringify({
+      command: process.argv[2],
+      argv
+    }),
   }
 }
-const webpackCliOpts = {
+const webpackServerOpts = {
+  stdio: 'inherit',
+  env: {
+    ...process.env,
+    JUMPSTART: JSON.stringify({
+      command: process.argv[2],
+      argv
+    }),
+  }
+}
+const webpackCliArgs = {
   mode: 'production',
   ...argv,
   config: require.resolve('./webpack'),
   progress: false,
 }
-const webpackServerOpts = {
+const webpackServerArgs = {
   quiet: true,
   mode: 'development',
   ...argv,
@@ -32,9 +44,9 @@ const webpackServerOpts = {
 }
 
 if (process.argv[2] === 'webpack-cli') {
-  run('webpack-cli', webpackCliOpts, processOpts)
+  run('webpack-cli', webpackCliArgs, webpackCliOpts)
 } else if (process.argv[2] === 'webpack-dev-server') {
-  run('webpack-dev-server', webpackServerOpts, processOpts)
+  run('webpack-dev-server', webpackServerArgs, webpackServerOpts)
 } else {
   console.log('Invalid command!')
   console.log('$ jumpstart webpack-cli|webpack-dev-server [options]')
