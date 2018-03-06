@@ -2,7 +2,7 @@ const babelLoader = (presets = [], plugins = []) => ({
   loader: require.resolve('babel-loader'),
   options: { presets, plugins }
 })
-module.exports = () => ({
+module.exports = ({ pragma }) => ({
   test: /\.js$/,
   exclude: /node_modules/,
   use: babelLoader([[
@@ -15,7 +15,7 @@ module.exports = () => ({
       { useBuiltIns: true },
     ], [
       require.resolve('babel-plugin-transform-react-jsx'),
-      { useBuiltIns: true },
+      { useBuiltIns: true, pragma },
     ]
   ])
 })
