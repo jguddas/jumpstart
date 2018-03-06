@@ -10,7 +10,10 @@ module.exports = () => ({
     { modules: false, loose: true }
   ]], [
     require.resolve('babel-plugin-transform-class-properties'),
-    require.resolve('babel-plugin-transform-object-rest-spread'),
+    [
+      require.resolve('babel-plugin-transform-object-rest-spread'),
+      { useBuiltIns: true },
+    ],
     require.resolve('babel-plugin-transform-react-jsx'),
   ])
 })
