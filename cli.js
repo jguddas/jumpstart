@@ -44,6 +44,7 @@ const webpackCliArgs = {
 const webpackServerArgs = {
   quiet: argv.progress !== false,
   mode: 'development',
+  port: 3000,
   ...argv,
   config: require.resolve('./webpack'),
   progress: false,
