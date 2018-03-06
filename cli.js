@@ -39,6 +39,7 @@ const webpackCliArgs = {
   mode: 'production',
   ...argv,
   config: require.resolve('./webpack'),
+  pragma: undefined,
   progress: false,
 }
 const webpackServerArgs = {
@@ -47,6 +48,7 @@ const webpackServerArgs = {
   port: 3000,
   ...argv,
   config: require.resolve('./webpack'),
+  pragma: undefined,
   progress: false,
 }
 
