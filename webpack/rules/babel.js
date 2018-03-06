@@ -13,7 +13,9 @@ module.exports = () => ({
     [
       require.resolve('babel-plugin-transform-object-rest-spread'),
       { useBuiltIns: true },
-    ],
-    require.resolve('babel-plugin-transform-react-jsx'),
+    ], [
+      require.resolve('babel-plugin-transform-react-jsx'),
+      { useBuiltIns: true },
+    ]
   ])
 })
