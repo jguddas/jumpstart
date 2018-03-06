@@ -3,6 +3,13 @@ module.exports = () => ({
   exclude: /node_modules/,
   use: {
     loader: require.resolve('babel-loader'),
-    options: {}
+    options: {
+      presets: [
+        [
+          require.resolve('babel-preset-env'),
+          { modules: false, loose: true }
+        ]
+      ]
+    }
   }
 })
