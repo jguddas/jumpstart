@@ -1,6 +1,5 @@
 const path = require('path')
 const cssRules = require('./rules/css')
-const cssLoader = require('./loaders/css')
 const LogPlugin = require('./plugins/log-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
@@ -17,7 +16,7 @@ module.exports = (env, { mode, contentBase }) => {
     new LogPlugin(() => production && process.stderr.clearLine())
   )
   const rules = [
-    cssRules((opts = {}) => cssLoader(ExtractTextPlugin.extract)({ minimize: production, ...opts }))
+    cssRules(ExtractTextPlugin.extract, { minimize: production })
   ]
   const devServer = {
     contentBase: [
