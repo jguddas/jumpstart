@@ -1,6 +1,5 @@
 const path = require('path')
-const cssRules = require('./rules/css')
-const sassRules = require('./rules/sass')
+const styleRules = require('./rules/style')
 const babelRules = require('./rules/babel')
 const LogPlugin = require('./plugins/log-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -19,8 +18,7 @@ module.exports = (env, { mode, contentBase }) => {
   )
   const rules = [
     babelRules({ pragma: argv.pragma }),
-    cssRules(ExtractTextPlugin.extract, { minimize: production }),
-    sassRules(ExtractTextPlugin.extract, { minimize: production }),
+    ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
   const devServer = {
     contentBase: [
