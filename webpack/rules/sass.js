@@ -7,6 +7,9 @@ const sassLoader = (extract, opts = {}) => extract({
       localIdentName: opts.modules && '[local]-[hash:base64:5]',
       ...opts,
     }
+  }, {
+    loader: require.resolve('postcss-loader'),
+    options: { plugins: [] },
   }, require.resolve('sass-loader')],
 })
 module.exports = (extract, opts = {}) => ({
