@@ -13,6 +13,7 @@
   "author": "Jakob Guddas",
   "license": "MIT",
   "dependencies": {
+    "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -27,6 +28,7 @@
     "minimist": "^1.2.0",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.1.1",
+    "postcss-short": "^4.1.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.2",
     "webpack": "^4.0.1",
