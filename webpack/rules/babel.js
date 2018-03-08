@@ -2,7 +2,7 @@ const babelLoader = (presets = [], plugins = []) => ({
   loader: require.resolve('babel-loader'),
   options: { presets, plugins }
 })
-module.exports = ({ pragma }) => ({
+module.exports = ({ pragma }) => [{
   test: /\.js$/,
   exclude: /node_modules/,
   use: babelLoader([[
@@ -18,4 +18,4 @@ module.exports = ({ pragma }) => ({
       { useBuiltIns: true, pragma },
     ]
   ])
-})
+}]

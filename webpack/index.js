@@ -17,7 +17,7 @@ module.exports = (env, { mode, contentBase }) => {
     new LogPlugin(() => production && process.stderr.clearLine())
   )
   const rules = [
-    babelRules({ pragma: argv.pragma }),
+    ...babelRules({ pragma: argv.pragma }),
     ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
   const devServer = {
