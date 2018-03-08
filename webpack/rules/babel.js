@@ -19,7 +19,7 @@ module.exports = ({ pragma }) => {
     }
   })
   return [{
-    test: /\.js$/,
+    test: /\.jsx?$/,
     exclude: /node_modules/,
     use: babelLoader()
   }]
