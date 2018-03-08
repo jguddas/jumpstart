@@ -25,6 +25,14 @@ module.exports = ({ pragma }) => {
   }, {
     test: /\.ls[cx]?$/,
     exclude: /node_modules/,
-    use: babelLoader(null, require.resolve('@oigroup/babel-plugin-lightscript'))
+    use: babelLoader(null, [[
+      require.resolve('@oigroup/babel-plugin-lightscript'),
+      {
+        enhancedTry: true,
+        noEnforcedSubscriptIndentation: true,
+        placeholderArgs: true,
+        placeholder: '$',
+      }
+    ]])
   }]
 }
