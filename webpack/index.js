@@ -26,10 +26,12 @@ module.exports = (env, { mode, contentBase }) => {
       path.join(__dirname, 'template'),
     ]
   }
+  const extensions = ['.js', '.jsx', '.lsc', '.lsx']
 
   return {
     devServer,
     plugins,
     module: { rules },
+    resolve: { extensions },
   }
 }
