@@ -57,6 +57,6 @@ if (process.argv[2] === 'webpack-cli') {
 } else if (process.argv[2] === 'webpack-dev-server') {
   run('webpack-dev-server', webpackServerArgs, webpackServerOpts)
 } else {
-  console.log('Invalid command!')
+  if(process.argv[2]) console.log('Invalid command!')
   console.log('$ jumpstart webpack-cli|webpack-dev-server [options]')
 }
