@@ -14,11 +14,8 @@ const webpackCliOpts = {
   env: {
     ...process.env,
     JUMPSTART: JSON.stringify({
-      command: process.argv[2],
-      argv: {
-        progress: true,
-        ...argv,
-      }
+      progress: true,
+      ...argv,
     }),
   }
 }
@@ -27,11 +24,8 @@ const webpackServerOpts = {
   env: {
     ...process.env,
     JUMPSTART: JSON.stringify({
-      command: process.argv[2],
-      argv: {
-        progress: true,
-        ...argv,
-      }
+      progress: true,
+      ...argv,
     }),
   }
 }

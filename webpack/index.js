@@ -5,7 +5,7 @@ const LogPlugin = require('./plugins/log-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = (env, { mode, contentBase }) => {
-  const { command, argv = {} } = JSON.parse(process.env.JUMPSTART || '{}')
+  const argv = JSON.parse(process.env.JUMPSTART || '{}')
   const production = (env || mode) === 'production'
 
   const plugins = [
