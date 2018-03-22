@@ -1,38 +1,28 @@
 module.exports = ({ pragma }) => {
-  const babelLoader = (presets, plugins, override) => ({
-    loader: require.resolve('babel-loader'),
-    options: {
-      presets: (override && presets) || [[
-        require.resolve('babel-preset-env'),
-        { modules: false, loose: true }
-      ]].concat(presets || []),
-      plugins: (override && plugins) || [
-        require.resolve('babel-plugin-transform-class-properties'),
-        [
-          require.resolve('babel-plugin-transform-object-rest-spread'),
-          { useBuiltIns: true },
-        ], [
-          require.resolve('babel-plugin-transform-react-jsx'),
-          { useBuiltIns: true, pragma },
-        ]
-      ].concat(plugins || []),
-    }
-  })
   return [{
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    use: babelLoader()
+    use: {
+      loader: require.resolve('babel-loader'),
+      options: { presets: require.resolve('../../babel') }
+    }
   }, {
     test: /\.ls[cx]?$/,
     exclude: /node_modules/,
-    use: babelLoader(null, [[
-      require.resolve('@oigroup/babel-plugin-lightscript'),
-      {
-        enhancedTry: true,
-        noEnforcedSubscriptIndentation: true,
-        placeholderArgs: true,
-        placeholder: '$',
+    use: {
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: require.resolve('../../babel'),
+        plugins: [[
+          require.resolve('@oigroup/babel-plugin-lightscript'),
+          {
+            enhancedTry: true,
+            noEnforcedSubscriptIndentation: true,
+            placeholderArgs: true,
+            placeholder: '$',
+          }
+        ]]
       }
-    ]])
+    }
   }]
 }
