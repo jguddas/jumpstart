@@ -13,15 +13,7 @@ module.exports = ({ pragma }) => {
       loader: require.resolve('babel-loader'),
       options: {
         presets: require.resolve('../../babel'),
-        plugins: [[
-          require.resolve('@oigroup/babel-plugin-lightscript'),
-          {
-            enhancedTry: true,
-            noEnforcedSubscriptIndentation: true,
-            placeholderArgs: true,
-            placeholder: '$',
-          }
-        ]]
+        plugins: require.resolve('@oigroup/babel-plugin-lightscript'),
       }
     }
   }]
