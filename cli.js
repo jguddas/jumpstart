@@ -18,7 +18,10 @@ const run = command => ({ mapped, argv }) => spawn(
 const cli = oargs()
 
 cli
-  .command('build', { description: 'run webpack-cli' }, run('webpack-cli'))
+  .command('build', {
+    description: 'run webpack-cli',
+    alias: 'prod',
+  }, run('webpack-cli'))
   .option('mode', { default: 'production', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('progress', { default: true, filter: 'env', inHelp: false })
@@ -27,7 +30,8 @@ cli
 
 cli
   .command('start', {
-    description: 'run webpack-dev-server'
+    description: 'run webpack-dev-server',
+    alias: 'dev'
   }, run('webpack-dev-server'))
   .option('mode', { default: 'development', inHelp: false})
   .option('port', { default: 3000, inHelp: false })
@@ -38,7 +42,10 @@ cli
   .option('help', { description: 'show webpack-dev-server help' })
 
 cli
-  .command('lint', { description: 'run eslint' }, out => run('eslint')({
+  .command('lint', {
+    description: 'run eslint',
+    alias: 'eslint'
+  }, out => run('eslint')({
     ...out,
     argv: {
       ...out.argv,
@@ -51,7 +58,10 @@ cli
   .option('help', { description: 'show eslint help' })
 
 cli
-  .command('compile', { description: 'run babel-cli' }, run('babel'))
+  .command('compile', {
+    description: 'run babel-cli',
+    alias: 'babel',
+  }, run('babel'))
   .option('presets', {
     inHelp: false,
     default: require.resolve('./babel'),
