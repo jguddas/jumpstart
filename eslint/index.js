@@ -1,11 +1,18 @@
+const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
-  extends: ['eslint:recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended'
+  ],
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module',
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
     },
+  },
+  settings: {
+    react: { pragma: argv.pragma },
   },
   env: {
     node: true,
