@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 const { spawn } = require('child_process')
-const dargs = require('dargs')
 const oargs = require('oargs')
 
-const run = command => out => spawn(
+const run = command => ({ mapped, argv }) => spawn(
   require.resolve(`.bin/${command}`),
-  dargs({ ...out.mapped.default, _: out.argv._ }),
+  Object.keys(mapped.default)
+    .map(val => `--${val}=${mapped.default[val]}`).concat(argv._),
   {
     stdio: 'inherit',
     env: {
       ...process.env,
-      JUMPSTART: JSON.stringify(out.mapped.env || '{}'),
+      JUMPSTART: JSON.stringify(mapped.env || '{}'),
     }
   }
 )

@@ -24,7 +24,6 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.10",
-    "dargs": "^5.1.0",
     "eslint": "~4.8.0",
     "eslint-plugin-react": "^7.7.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
