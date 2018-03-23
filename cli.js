@@ -50,4 +50,14 @@ cli
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('help', { description: 'show eslint help' })
 
+cli
+  .command('compile', { description: 'run babel-cli' }, run('babel'))
+  .option('presets', {
+    inHelp: false,
+    default: require.resolve('./babel'),
+    mapper: val => require.resolve('./babel') + ',' + val,
+  })
+  .option('pragma', { filter: 'env', description: 'set jsx pragma' })
+  .option('help', { description: 'show babel-cli help' })
+
 if (!cli.parse()) cli.showHelp(require('./package.json'))
