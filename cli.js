@@ -10,7 +10,7 @@ const run = command => out => spawn(
     stdio: 'inherit',
     env: {
       ...process.env,
-      JUMPSTART: JSON.stringify(out.mapped.env),
+      JUMPSTART: JSON.stringify(out.mapped.env || '{}'),
     }
   }
 )
@@ -18,10 +18,7 @@ const run = command => out => spawn(
 const cli = oargs()
 
 cli
-  .command('build', {
-    description: 'run webpack-cli',
-    filter: ['default']
-  }, run('webpack-cli'))
+  .command('build', { description: 'run webpack-cli' }, run('webpack-cli'))
   .option('mode', { default: 'production', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('progress', { default: true, filter: 'env', inHelp: false })
@@ -41,9 +38,13 @@ cli
   .option('help', { description: 'show webpack-dev-server help' })
 
 cli
-  .command('lint', {
-    description: 'run eslint'
-  }, run('eslint'))
+  .command('lint', { description: 'run eslint' }, out => run('eslint')({
+    ...out,
+    argv: {
+      ...out.argv,
+      _: out.argv._.length ? out.argv._ : ['src']
+    }
+  }))
   .option('config', { overide: require.resolve('./eslint'), inHelp: false })
   .option('ext', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
