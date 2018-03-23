@@ -40,4 +40,11 @@ cli
   .option('quiet', { default: true, inHelp: false })
   .option('help', { description: 'show webpack-dev-server help' })
 
+cli
+  .command('lint', {
+    description: 'run eslint'
+  }, run('eslint'))
+  .option('config', { overide: require.resolve('./eslint'), inHelp: false })
+  .option('help', { description: 'show eslint help' })
+
 if (!cli.parse()) cli.showHelp(require('./package.json'))
