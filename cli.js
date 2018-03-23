@@ -61,6 +61,19 @@ cli
   .command('compile', {
     description: 'run babel-cli',
     alias: 'babel',
+    aliases: {
+      D: 'copy-files',
+      M: 'module-ids',
+      V: 'version',
+      d: 'out-dir',
+      f: 'filename',
+      h: 'help',
+      o: 'out-file',
+      q: 'quiet',
+      s: 'source-maps',
+      w: 'watch',
+      x: 'extensions',
+    }
   }, run('babel'))
   .option('presets', {
     inHelp: false,
@@ -72,8 +85,9 @@ cli
     default: require.resolve('@oigroup/babel-plugin-lightscript'),
     mapper: val => require.resolve('@oigroup/babel-plugin-lightscript') + ',' + val,
   })
-  .option('extensions', { default: '.js,.jsx,.lsc,.lsx', alias: 'x', inHelp: false })
+  .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('help', { description: 'show babel-cli help' })
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))
+
