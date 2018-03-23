@@ -83,7 +83,7 @@ cli
   .option('plugins', {
     inHelp: false,
     default: require.resolve('@oigroup/babel-plugin-lightscript'),
-    mapper: val => require.resolve('@oigroup/babel-plugin-lightscript') + ',' + val,
+    mapper: x => require.resolve('@oigroup/babel-plugin-lightscript') + ',' + x,
   })
   .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
