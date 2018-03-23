@@ -45,6 +45,7 @@ cli
     description: 'run eslint'
   }, run('eslint'))
   .option('config', { overide: require.resolve('./eslint'), inHelp: false })
+  .option('ext', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('help', { description: 'show eslint help' })
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))

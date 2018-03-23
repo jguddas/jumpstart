@@ -14,6 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@oigroup/babel-plugin-lightscript": "^3.1.0-alpha.2",
+    "@oigroup/lightscript-eslint": "^3.1.0-alpha.2",
     "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",

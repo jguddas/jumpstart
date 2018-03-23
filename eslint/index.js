@@ -11,4 +11,10 @@ module.exports = {
     node: true,
     browser: true,
   },
+  overrides: [
+    {
+      files: ['*.lsc', '*.lsx'],
+      parser: '@oigroup/lightscript-eslint',
+    }
+  ],
 }
