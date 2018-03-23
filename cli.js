@@ -57,6 +57,12 @@ cli
     default: require.resolve('./babel'),
     mapper: val => require.resolve('./babel') + ',' + val,
   })
+  .option('plugins', {
+    inHelp: false,
+    default: require.resolve('@oigroup/babel-plugin-lightscript'),
+    mapper: val => require.resolve('@oigroup/babel-plugin-lightscript') + ',' + val,
+  })
+  .option('extensions', { default: '.js,.jsx,.lsc,.lsx', alias: 'x', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('help', { description: 'show babel-cli help' })
 
