@@ -52,7 +52,11 @@ cli
       _: out.argv._.length ? out.argv._ : ['src']
     }
   }))
-  .option('config', { overide: require.resolve('./eslint'), inHelp: false })
+  .option('config', {
+    overide: require.resolve('./eslint'),
+    alias:'c',
+    inHelp: false
+  })
   .option('ext', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('help', { description: 'show eslint help' })
