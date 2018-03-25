@@ -27,8 +27,10 @@ module.exports = (env, { mode, contentBase }) => {
     ]
   }
   const extensions = ['.js', '.jsx', '.lsc', '.lsx']
+  const devtool = !production && 'cheap-source-map'
 
   return {
+    devtool,
     devServer,
     plugins,
     module: { rules },
