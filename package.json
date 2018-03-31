@@ -1,17 +1,13 @@
 {
   "name": "jumpstart-cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Config and boilerplate free dev/build tool.",
+  "repository": "jguddas/jumpstart",
+  "author": "Jakob Guddas",
+  "license": "MIT",
   "bin": {
     "jumpstart": "cli.js"
   },
-  "keywords": [],
-  "author": "Jakob Guddas",
-  "license": "MIT",
   "dependencies": {
     "@oigroup/babel-plugin-lightscript": "^3.1.0-alpha.2",
     "@oigroup/lightscript-eslint": "^3.1.0-alpha.2",
