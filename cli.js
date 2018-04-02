@@ -91,6 +91,11 @@ cli
   })
   .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
+  .option('modules', {
+    description: 'env preset modules option',
+    default: 'commonjs',
+    filter: 'env',
+  })
   .option('help', { description: 'show babel-cli help' })
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))
