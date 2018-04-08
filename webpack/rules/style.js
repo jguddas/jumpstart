@@ -20,7 +20,7 @@ const sassLoader = (extract, opts = {}, after = []) =>
 const lessLoader = (extract, opts = {}, after = []) =>
   cssLoader(extract, opts, [require.resolve('less-loader')].concat(after))
 module.exports = (extract, opts = {}) => [{
-    test: /.css$/,
+    test: /\.css$/,
     oneOf: [
       {
         resourceQuery: /modules/,
@@ -30,7 +30,7 @@ module.exports = (extract, opts = {}) => [{
       },
     ],
   }, {
-    test: /.s[ac]ss$/,
+    test: /\.s[ac]ss$/,
     oneOf: [
       {
         resourceQuery: /modules/,
@@ -40,7 +40,7 @@ module.exports = (extract, opts = {}) => [{
       },
     ],
   }, {
-    test: /.less$/,
+    test: /\.less$/,
     oneOf: [
       {
         resourceQuery: /modules/,
