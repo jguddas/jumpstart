@@ -1,4 +1,5 @@
 const path = require('path')
+const fileRules = require('./rules/file')
 const styleRules = require('./rules/style')
 const babelRules = require('./rules/babel')
 const LogPlugin = require('./plugins/log-plugin')
@@ -22,6 +23,7 @@ module.exports = (env, { mode, outputPublicPath }) => {
     new LogPlugin(() => production && process.stderr.clearLine())
   )
   const rules = [
+    ...fileRules(),
     ...babelRules({ pragma: argv.pragma }),
     ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
