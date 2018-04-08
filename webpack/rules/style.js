@@ -17,6 +17,8 @@ const cssLoader = (extract, opts = {}, after = []) => extract({
 })
 const sassLoader = (extract, opts = {}, after = []) =>
   cssLoader(extract, opts, [require.resolve('sass-loader')].concat(after))
+const lessLoader = (extract, opts = {}, after = []) =>
+  cssLoader(extract, opts, [require.resolve('less-loader')].concat(after))
 module.exports = (extract, opts = {}) => [{
     test: /.css$/,
     oneOf: [
@@ -35,6 +37,16 @@ module.exports = (extract, opts = {}) => [{
         use: sassLoader(extract, { ...opts, modules: true }),
       }, {
         use: sassLoader(extract, opts),
+      },
+    ],
+  }, {
+    test: /.less$/,
+    oneOf: [
+      {
+        resourceQuery: /modules/,
+        use: lessLoader(extract, { ...opts, modules: true }),
+      }, {
+        use: lessLoader(extract, opts),
       },
     ],
   }]
