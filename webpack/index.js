@@ -30,12 +30,13 @@ module.exports = (env, { mode, outputPublicPath }) => {
   const devServer = { contentBase }
   const extensions = ['.js', '.jsx', '.lsc', '.lsx']
   const devtool = !production && 'cheap-source-map'
+  const alias = argv['resolve-alias']
 
   return {
     devtool,
     devServer,
     plugins,
     module: { rules },
-    resolve: { extensions },
+    resolve: { extensions, alias },
   }
 }

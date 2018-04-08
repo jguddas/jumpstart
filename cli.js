@@ -25,6 +25,11 @@ cli
   .option('mode', { default: 'production', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('progress', { default: true, filter: 'env', inHelp: false })
+  .option('resolve-alias', {
+    filter: 'env',
+    inHelp: false,
+    mapper: processResolveAlias
+  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 
@@ -39,6 +44,11 @@ cli
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('progress', { default: true, filter: 'env', inHelp: false })
   .option('quiet', { default: true, inHelp: false })
+  .option('resolve-alias', {
+    filter: 'env',
+    inHelp: false,
+    mapper: processResolveAlias
+  })
   .option('help', { description: 'show webpack-dev-server help' })
 
 cli
@@ -99,4 +109,10 @@ cli
   .option('help', { description: 'show babel-cli help' })
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))
+
+function processResolveAlias(val) {
+  return val.split(',').reduce((acc, val) =>
+    Object.assign(acc, { [val.split('=')[0]]: val.split('=')[1] })
+  , {})
+}
 
