@@ -1,6 +1,6 @@
 {
   "name": "jumpstart-cli",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Config and boilerplate free dev/build tool.",
   "repository": "jguddas/jumpstart",
   "author": "Jakob Guddas",
@@ -48,6 +48,7 @@
     "webpack/index.js",
     "webpack/plugins/log-plugin.js",
     "webpack/rules/babel.js",
+    "webpack/rules/file.js",
     "webpack/rules/style.js",
     "webpack/template/index.html"
   ]
