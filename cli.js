@@ -30,6 +30,11 @@ cli
     inHelp: false,
     mapper: processResolveAlias
   })
+  .option('target', {
+    description: 'set env target',
+    filter: 'env',
+    mapper: processEnvTarget
+  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 
@@ -48,6 +53,11 @@ cli
     filter: 'env',
     inHelp: false,
     mapper: processResolveAlias
+  })
+  .option('target', {
+    description: 'set env target',
+    filter: 'env',
+    mapper: processEnvTarget
   })
   .option('help', { description: 'show webpack-dev-server help' })
 
@@ -101,6 +111,11 @@ cli
   })
   .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
+  .option('target', {
+    description: 'set env target',
+    filter: 'env',
+    mapper: processEnvTarget
+  })
   .option('modules', {
     description: 'env preset modules option',
     default: 'commonjs',
@@ -109,6 +124,11 @@ cli
   .option('help', { description: 'show babel-cli help' })
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))
+
+function processEnvTarget(val) {
+  const [env, version] = val.split(':')
+  return { [env]: version }
+}
 
 function processResolveAlias(val) {
   return val.split(',').reduce((acc, val) =>
