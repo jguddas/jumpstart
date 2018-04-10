@@ -18,8 +18,9 @@ module.exports = (env, { mode, outputPublicPath }) => {
       filename: 'style.css',
       disable: !production,
     }),
+  ].concat(outputPublicPath === 'false' ? [] : [
     new CopyWebpackPlugin(contentBase)
-  ].concat(!argv.progress ? [] :
+  ]).concat(!argv.progress ? [] :
     new LogPlugin(() => production && process.stderr.clearLine())
   )
   const rules = [
