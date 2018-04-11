@@ -16,7 +16,7 @@ module.exports = (env, { mode, outputPublicPath }) => {
   const plugins = [
     new ExtractTextPlugin({
       filename: argv['output-css-filename'] || 'style.css',
-      disable: !(argv['extract-css'] || production),
+      disable: !argv['extract-css'],
     }),
   ].concat(outputPublicPath === 'false' ? [] : [
     new CopyWebpackPlugin(contentBase)
