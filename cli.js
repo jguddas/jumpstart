@@ -130,7 +130,7 @@ cli
 if (!cli.parse()) cli.showHelp(require('./package.json'))
 
 function processEnvTarget(val) {
-  const [env, version] = val.split(':')
+  const [env, version = true] = val.split(':')
   return { [env]: version }
 }
 
