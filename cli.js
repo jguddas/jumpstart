@@ -35,6 +35,10 @@ cli
     filter: 'env',
     mapper: processEnvTarget
   })
+  .option('output-css-filename', {
+    description: 'output filename of the extracted css',
+    filter: 'env'
+  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 

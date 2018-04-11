@@ -15,7 +15,7 @@ module.exports = (env, { mode, outputPublicPath }) => {
   ].concat(outputPublicPath || []).reverse()
   const plugins = [
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: argv['output-css-filename'] || 'style.css',
       disable: !production,
     }),
   ].concat(outputPublicPath === 'false' ? [] : [
