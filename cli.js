@@ -39,6 +39,11 @@ cli
     description: 'output filename of the extracted css',
     filter: 'env'
   })
+  .option('extract-css', {
+    default: true,
+    filter: 'env',
+    description: 'extract css, defaults to true'
+  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 
@@ -53,6 +58,11 @@ cli
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('progress', { default: true, filter: 'env', inHelp: false })
   .option('quiet', { default: true, inHelp: false })
+  .option('extract-css', {
+    default: false,
+    filter: 'env',
+    description: 'extract css, defaults to false'
+  })
   .option('resolve-alias', {
     filter: 'env',
     inHelp: false,
