@@ -7,7 +7,7 @@ module.exports = (context, opts = {}) => {
     presets: addOpts('babel-preset-env')({
       modules: false,
       loose: true
-    }, opts, argv, { targets: argv.target }),
+    }, opts, argv, { targets: argv['env-target'] || opts.targets || {} }),
     plugins: addOpts(
       'babel-plugin-transform-class-properties',
       'babel-plugin-transform-object-rest-spread',

@@ -30,7 +30,7 @@ cli
     inHelp: false,
     mapper: processResolveAlias
   })
-  .option('target', {
+  .option('env-target', {
     description: 'set env target',
     filter: 'env',
     mapper: processEnvTarget
@@ -58,7 +58,7 @@ cli
     inHelp: false,
     mapper: processResolveAlias
   })
-  .option('target', {
+  .option('env-target', {
     description: 'set env target',
     filter: 'env',
     mapper: processEnvTarget
@@ -115,7 +115,7 @@ cli
   })
   .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
-  .option('target', {
+  .option('env-target', {
     description: 'set env target',
     filter: 'env',
     mapper: processEnvTarget
