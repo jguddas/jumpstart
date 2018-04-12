@@ -147,6 +147,7 @@ cli
     overide: require.resolve('./postcss'),
     inHelp: false
   })
+  .option('minimize', { description: 'minimize css', filter: 'env' })
   .option('help', { description: 'show postcss-cli help' })
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))

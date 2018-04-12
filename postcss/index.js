@@ -13,6 +13,7 @@ less.renderSync = function (input, options = {}) {
   return result
 }
 
+const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = ({ file, options }) => {
   const filename = path.join(file.dirname, file.basename)
   let parser
@@ -25,12 +26,15 @@ module.exports = ({ file, options }) => {
       less.renderSync(String(data)).css
     )
   }
+  const map = !(argv.minimize && options.map.inline) && options.map
   return {
     ...options,
+    map,
     parser,
     plugins: [
       require('autoprefixer')(),
       require('postcss-short')(),
+      argv.minimize && require('cssnano')(),
     ]
   }
 }
