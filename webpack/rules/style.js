@@ -1,3 +1,4 @@
+const path = require('path')
 const cssLoader = (extract, opts = {}, after = []) => extract({
   fallback: require.resolve('style-loader'),
   use: [{
@@ -11,7 +12,7 @@ const cssLoader = (extract, opts = {}, after = []) => extract({
     loader: require.resolve('postcss-loader'),
     options: {
       config: {
-        path: require.resolve('../../postcss')
+        path: path.dirname(require.resolve('../../postcss'))
       }
     },
   }].concat(after)
