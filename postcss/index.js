@@ -15,7 +15,7 @@ less.renderSync = function (input, options = {}) {
 
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = ({ file, options }) => {
-  let parser
+  let parser = options.parser
   if (file && /^\.s[ca]ss$/.test(file.extname)) {
     const filename = path.join(file.dirname, file.basename)
     parser = () => postcss.parse(
