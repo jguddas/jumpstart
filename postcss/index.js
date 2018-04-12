@@ -15,13 +15,13 @@ less.renderSync = function (input, options = {}) {
 
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = ({ file, options }) => {
-  const filename = path.join(file.dirname, file.basename)
   let parser
-  if (/^\.s[ca]ss$/.test(file.extname)) {
+  if (file && /^\.s[ca]ss$/.test(file.extname)) {
+    const filename = path.join(file.dirname, file.basename)
     parser = () => postcss.parse(
       sass.renderSync({ file: filename }).css
     )
-  } else if ('.less' === file.extname) {
+  } else if (file && '.less' === file.extname) {
     parser = data => postcss.parse(
       less.renderSync(String(data)).css
     )
