@@ -9,10 +9,11 @@ const cssLoader = (extract, opts = {}, after = []) => extract({
     },
   }, {
     loader: require.resolve('postcss-loader'),
-    options: { plugins: [
-      require('autoprefixer')(),
-      require('postcss-short')(),
-    ] },
+    options: {
+      config: {
+        path: require.resolve('../../postcss')
+      }
+    },
   }].concat(after)
 })
 const sassLoader = (extract, opts = {}, after = []) =>
