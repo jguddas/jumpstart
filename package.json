@@ -1,6 +1,6 @@
 {
   "name": "jumpstart-cli",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Config and boilerplate free dev/build tool.",
   "repository": "jguddas/jumpstart",
   "author": "Jakob Guddas",
@@ -46,6 +46,8 @@
     "cli.js",
     "eslint/index.js",
     "package.json",
+    "postcss/index.js",
+    "postcss/postcss.config.js",
     "webpack/index.js",
     "webpack/plugins/log-plugin.js",
     "webpack/rules/babel.js",
