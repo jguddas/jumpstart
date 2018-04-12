@@ -137,6 +137,18 @@ cli
   })
   .option('help', { description: 'show babel-cli help' })
 
+
+cli
+  .command('css', {
+    description: 'run postcss-cli',
+    alias: 'postcss',
+  }, run('postcss'))
+  .option('config', {
+    overide: require.resolve('./postcss'),
+    inHelp: false
+  })
+  .option('help', { description: 'show postcss-cli help' })
+
 if (!cli.parse()) cli.showHelp(require('./package.json'))
 
 function processEnvTarget(val) {
