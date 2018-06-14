@@ -1,6 +1,6 @@
 {
   "name": "jumpstart-cli",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "Config and boilerplate free dev/build tool.",
   "repository": "jguddas/jumpstart",
   "author": "Jakob Guddas",
