@@ -2,10 +2,14 @@ const chalk = require('chalk')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 
 function logger(title, msg = '', color = 'green') {
-  process.stderr.clearLine()
-  process.stderr.cursorTo(0)
+  if (process.stderr.isTTY) {
+    process.stderr.clearLine()
+    process.stderr.cursorTo(0)
+  }
   process.stderr.write(`${chalk.reset.inverse.bold[color](` ${title} `)} ${msg}`)
-  process.stderr.cursorTo(0)
+  if (process.stderr.isTTY) {
+    process.stderr.cursorTo(0)
+  }
 }
 
 module.exports = class LogPlugin {
