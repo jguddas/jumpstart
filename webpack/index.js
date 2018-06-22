@@ -6,19 +6,19 @@ const LogPlugin = require('./plugins/log-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-module.exports = (env, { mode, outputPublicPath }) => {
+module.exports = (env, { mode, contentBase:base }) => {
   const argv = JSON.parse(process.env.JUMPSTART || '{}')
   const production = (env || mode) === 'production'
 
   const contentBase = [
     path.join(__dirname, 'template')
-  ].concat(outputPublicPath || []).reverse()
+  ].concat(base || []).reverse()
   const plugins = [
     new ExtractTextPlugin({
       filename: argv['output-css-filename'] || 'style.css',
       disable: !argv['extract-css'],
     }),
-  ].concat(outputPublicPath === 'false' ? [] : [
+  ].concat(base === 'false' ? [] : [
     new CopyWebpackPlugin(contentBase)
   ]).concat(!argv.progress ? [] :
     new LogPlugin(() => production && process.stderr.clearLine())
