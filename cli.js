@@ -50,6 +50,15 @@ cli
     default: path.join(__dirname, 'webpack/template/index.ejs'),
     description: 'set custom html template'
   })
+  .option('template-title', {
+    filter: 'env',
+    description: 'set custom html template title'
+  })
+  .option('template-parameters', {
+    filter: 'env',
+    description: 'set custom html template parameters',
+    mapper: JSON.parse,
+  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 
@@ -83,6 +92,15 @@ cli
     filter: 'env',
     default: path.join(__dirname, 'webpack/template/index.ejs'),
     description: 'set custom html template'
+  })
+  .option('template-title', {
+    filter: 'env',
+    description: 'set custom html template title'
+  })
+  .option('template-parameters', {
+    filter: 'env',
+    description: 'set custom html template parameters',
+    mapper: JSON.parse,
   })
   .option('help', { description: 'show webpack-dev-server help' })
 
