@@ -18,6 +18,7 @@ module.exports = (env, { mode, contentBase }) => {
     }),
     new HtmlWebpackPlugin({
       title: argv['title'],
+      meta: argv['template-meta'],
       template: argv['template'],
       templateParameters: {
         title: argv['template-title'],

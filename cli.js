@@ -59,6 +59,14 @@ cli
     description: 'set custom html template parameters',
     mapper: JSON.parse,
   })
+  .option('template-meta', {
+    filter: 'env',
+    description: 'set html template meta option',
+    default: { viewport: 'width=device-width, initial-scale=1' },
+    mapper: val => !val ? {} : Object.assign({
+      viewport: 'width=device-width, initial-scale=1'
+    }, JSON.parse(val) || {})
+  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 
@@ -101,6 +109,14 @@ cli
     filter: 'env',
     description: 'set custom html template parameters',
     mapper: JSON.parse,
+  })
+  .option('template-meta', {
+    filter: 'env',
+    description: 'set html template meta option',
+    default: { viewport: 'width=device-width, initial-scale=1' },
+    mapper: val => !val ? {} : Object.assign({
+      viewport: 'width=device-width, initial-scale=1'
+    }, JSON.parse(val) || {})
   })
   .option('help', { description: 'show webpack-dev-server help' })
 
