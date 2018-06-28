@@ -16,6 +16,7 @@ module.exports = (env, { mode, contentBase }) => {
       filename: argv['output-css-filename'] || 'style.css',
       disable: !argv['extract-css'],
     }),
+  ].concat(!argv['template'] ? [] : [
     new HtmlWebpackPlugin({
       title: argv['title'],
       meta: argv['template-meta'],
@@ -25,7 +26,7 @@ module.exports = (env, { mode, contentBase }) => {
         ...argv['template-parameters'],
       }
     }),
-  ].concat(!contentBase ? [] : [
+  ]).concat(!contentBase ? [] : [
     new CopyWebpackPlugin([contentBase])
   ]).concat(!argv.progress ? [] :
     new LogPlugin(() => production && process.stderr.clearLine())
