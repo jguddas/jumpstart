@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const { spawn } = require('child_process')
 const oargs = require('oargs')
+const path = require('path')
 
 const run = command => ({ mapped, argv }) => spawn(
   require.resolve(`.bin/${command}`),
@@ -44,6 +45,11 @@ cli
     filter: 'env',
     description: 'extract css, defaults to true'
   })
+  .option('template', {
+    filter: 'env',
+    default: path.join(__dirname, 'webpack/template/index.ejs'),
+    description: 'set custom html template'
+  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 
@@ -72,6 +78,11 @@ cli
     description: 'set env target',
     filter: 'env',
     mapper: processEnvTarget
+  })
+  .option('template', {
+    filter: 'env',
+    default: path.join(__dirname, 'webpack/template/index.ejs'),
+    description: 'set custom html template'
   })
   .option('help', { description: 'show webpack-dev-server help' })
 

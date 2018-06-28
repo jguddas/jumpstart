@@ -17,7 +17,7 @@ module.exports = (env, { mode, contentBase }) => {
       disable: !argv['extract-css'],
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'template/index.ejs')
+      template: argv['template']
     }),
   ].concat(!contentBase ? [] : [
     new CopyWebpackPlugin([contentBase])
