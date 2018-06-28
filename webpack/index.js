@@ -5,21 +5,22 @@ const babelRules = require('./rules/babel')
 const LogPlugin = require('./plugins/log-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = (env, { mode, contentBase:base }) => {
+module.exports = (env, { mode, contentBase }) => {
   const argv = JSON.parse(process.env.JUMPSTART || '{}')
   const production = (env || mode) === 'production'
 
-  const contentBase = [
-    path.join(__dirname, 'template')
-  ].concat(base || []).reverse()
   const plugins = [
     new ExtractTextPlugin({
       filename: argv['output-css-filename'] || 'style.css',
       disable: !argv['extract-css'],
     }),
-  ].concat(base === 'false' ? [] : [
-    new CopyWebpackPlugin(contentBase)
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'template/index.ejs')
+    }),
+  ].concat(!contentBase ? [] : [
+    new CopyWebpackPlugin([contentBase])
   ]).concat(!argv.progress ? [] :
     new LogPlugin(() => production && process.stderr.clearLine())
   )
@@ -28,14 +29,12 @@ module.exports = (env, { mode, contentBase:base }) => {
     ...babelRules({ pragma: argv.pragma }),
     ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
-  const devServer = { contentBase }
   const extensions = ['.js', '.jsx', '.lsc', '.lsx']
   const devtool = !production && 'cheap-source-map'
   const alias = argv['resolve-alias']
 
   return {
     devtool,
-    devServer,
     plugins,
     module: { rules },
     resolve: { extensions, alias },
