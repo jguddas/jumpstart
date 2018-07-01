@@ -19,7 +19,10 @@ module.exports = (env, { mode, contentBase }) => {
       disable: !argv['extract-css'],
     }),
   ].concat(!argv['caching'] ? [] : [
-    new SWPrecacheWebpackPlugin({ minify: true }),
+    new SWPrecacheWebpackPlugin({
+      minify: true,
+      logger: function() {},
+    }),
     new ProvidePlugin({
       PRECACHE: production ? require.resolve(
         './template/serviceWorker.js'
