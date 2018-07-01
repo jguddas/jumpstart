@@ -12,6 +12,7 @@ module.exports = (context, opts = {}) => {
       'babel-plugin-transform-class-properties',
       'babel-plugin-transform-object-rest-spread',
       'babel-plugin-transform-react-jsx',
+      'babel-plugin-syntax-dynamic-import',
     )({ useBuiltIns:true, pragma: argv.pragma }, opts),
   }
 }
