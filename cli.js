@@ -45,6 +45,10 @@ cli
     filter: 'env',
     description: 'extract css, defaults to true'
   })
+  .option('caching', {
+    filter: 'env',
+    description: 'add precache module',
+  })
   .option('template', {
     filter: 'env',
     default: path.join(__dirname, 'webpack/template/index.ejs'),

@@ -6,6 +6,7 @@ const LogPlugin = require('./plugins/log-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 module.exports = (env, { mode, contentBase }) => {
   const argv = JSON.parse(process.env.JUMPSTART || '{}')
@@ -16,7 +17,9 @@ module.exports = (env, { mode, contentBase }) => {
       filename: argv['output-css-filename'] || 'style.css',
       disable: !argv['extract-css'],
     }),
-  ].concat(!argv['template'] ? [] : [
+  ].concat(!argv['caching'] ? [] : [
+    new SWPrecacheWebpackPlugin({ minify: true }),
+  ]).concat(!argv['template'] ? [] : [
     new HtmlWebpackPlugin({
       title: argv['title'],
       meta: argv['template-meta'],
