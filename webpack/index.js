@@ -7,6 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const { DefinePlugin, ProvidePlugin } = require('webpack')
 
 module.exports = (env, { mode, contentBase }) => {
   const argv = JSON.parse(process.env.JUMPSTART || '{}')
@@ -19,6 +20,13 @@ module.exports = (env, { mode, contentBase }) => {
     }),
   ].concat(!argv['caching'] ? [] : [
     new SWPrecacheWebpackPlugin({ minify: true }),
+    new ProvidePlugin({
+      PRECACHE: production ? require.resolve(
+        './template/serviceWorker.js'
+      ) : require.resolve(
+        './template/dummyServiceWorker.js'
+      )
+    }),
   ]).concat(!argv['template'] ? [] : [
     new HtmlWebpackPlugin({
       title: argv['title'],

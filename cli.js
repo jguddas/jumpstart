@@ -47,7 +47,7 @@ cli
   })
   .option('caching', {
     filter: 'env',
-    description: 'add precache module',
+    description: 'add precache module and helper',
   })
   .option('template', {
     filter: 'env',
@@ -89,6 +89,10 @@ cli
     default: false,
     filter: 'env',
     description: 'extract css, defaults to false'
+  })
+  .option('caching', {
+    filter: 'env',
+    description: 'add dummy precache module helper',
   })
   .option('resolve-alias', {
     filter: 'env',
