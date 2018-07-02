@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const { spawn } = require('child_process')
 const oargs = require('oargs')
+const combon = require('combon')
+const json5 = require('json5')
 const path = require('path')
 
 const run = command => ({ mapped, argv }) => spawn(
@@ -29,12 +31,12 @@ cli
   .option('resolve-alias', {
     filter: 'env',
     inHelp: false,
-    mapper: processResolveAlias,
+    mapper: transformString,
   })
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
-    mapper: processEnvTarget,
+    mapper: transformString,
   })
   .option('output-css-filename', {
     description: 'output filename of the extracted css',
@@ -62,15 +64,24 @@ cli
   .option('template-parameters', {
     filter: 'env',
     description: 'set custom html template parameters',
-    mapper: JSON.parse,
+    mapper: transformString,
   })
   .option('template-meta', {
     filter: 'env',
     description: 'set html template meta option',
     default: { viewport: 'width=device-width, initial-scale=1' },
-    mapper: val => !val ? {} : Object.assign({
-      viewport: 'width=device-width, initial-scale=1',
-    }, JSON.parse(val) || {}),
+    mapper: val => {
+      if (!val) return {}
+      const obj = transformString(val)
+      if (obj.viewport === false) {
+        delete obj.viewport
+        return obj
+      }
+      return {
+        viewport: 'width=device-width, initial-scale=1',
+        ...obj
+      }
+    }
   })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
@@ -98,12 +109,12 @@ cli
   .option('resolve-alias', {
     filter: 'env',
     inHelp: false,
-    mapper: processResolveAlias,
+    mapper: transformString,
   })
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
-    mapper: processEnvTarget,
+    mapper: transformString,
   })
   .option('template', {
     filter: 'env',
@@ -117,15 +128,24 @@ cli
   .option('template-parameters', {
     filter: 'env',
     description: 'set custom html template parameters',
-    mapper: JSON.parse,
+    mapper: transformString,
   })
   .option('template-meta', {
     filter: 'env',
     description: 'set html template meta option',
     default: { viewport: 'width=device-width, initial-scale=1' },
-    mapper: val => !val ? {} : Object.assign({
-      viewport: 'width=device-width, initial-scale=1',
-    }, JSON.parse(val) || {}),
+    mapper: val => {
+      if (!val) return {}
+      const obj = transformString(val)
+      if (obj.viewport === false) {
+        delete obj.viewport
+        return obj
+      }
+      return {
+        viewport: 'width=device-width, initial-scale=1',
+        ...obj
+      }
+    }
   })
   .option('help', { description: 'show webpack-dev-server help' })
 
@@ -182,7 +202,7 @@ cli
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
-    mapper: processEnvTarget,
+    mapper: transformString,
   })
   .option('modules', {
     description: 'env preset modules option',
@@ -206,14 +226,14 @@ cli
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))
 
-function processEnvTarget(val) {
-  const [env, version = true] = val.split(':')
-  return { [env]: version }
+function transformString(str) {
+  try {
+    return json5.parse(str)
+  } catch (e) {
+    try {
+      return json5.parse(`{${str}}`)
+    } catch (e) {
+      return combon.parse(str)
+    }
+  }
 }
-
-function processResolveAlias(val) {
-  return val.split(',').reduce((acc, val) =>
-    Object.assign(acc, { [val.split('=')[0]]: val.split('=')[1] })
-  , {})
-}
-
