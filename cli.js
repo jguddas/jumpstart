@@ -12,7 +12,7 @@ const run = command => ({ mapped, argv }) => spawn(
     env: {
       ...process.env,
       JUMPSTART: JSON.stringify(mapped.env || '{}'),
-    }
+    },
   }
 )
 
@@ -29,21 +29,22 @@ cli
   .option('resolve-alias', {
     filter: 'env',
     inHelp: false,
-    mapper: processResolveAlias
+    mapper: processResolveAlias,
   })
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
-    mapper: processEnvTarget
+    mapper: processEnvTarget,
   })
   .option('output-css-filename', {
     description: 'output filename of the extracted css',
-    filter: 'env'
+    default: 'style.css',
+    filter: 'env',
   })
   .option('extract-css', {
     default: true,
     filter: 'env',
-    description: 'extract css, defaults to true'
+    description: 'extract css, defaults to true',
   })
   .option('caching', {
     filter: 'env',
@@ -52,11 +53,11 @@ cli
   .option('template', {
     filter: 'env',
     default: path.join(__dirname, 'webpack/template/index.ejs'),
-    description: 'set custom html template'
+    description: 'set custom html template',
   })
   .option('template-title', {
     filter: 'env',
-    description: 'set custom html template title'
+    description: 'set custom html template title',
   })
   .option('template-parameters', {
     filter: 'env',
@@ -68,8 +69,8 @@ cli
     description: 'set html template meta option',
     default: { viewport: 'width=device-width, initial-scale=1' },
     mapper: val => !val ? {} : Object.assign({
-      viewport: 'width=device-width, initial-scale=1'
-    }, JSON.parse(val) || {})
+      viewport: 'width=device-width, initial-scale=1',
+    }, JSON.parse(val) || {}),
   })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
@@ -77,7 +78,7 @@ cli
 cli
   .command('start', {
     description: 'run webpack-dev-server',
-    alias: 'dev'
+    alias: 'dev',
   }, run('webpack-dev-server'))
   .option('mode', { default: 'development', inHelp: false})
   .option('port', { default: 3000, inHelp: false })
@@ -88,7 +89,7 @@ cli
   .option('extract-css', {
     default: false,
     filter: 'env',
-    description: 'extract css, defaults to false'
+    description: 'extract css, defaults to false',
   })
   .option('caching', {
     filter: 'env',
@@ -97,21 +98,21 @@ cli
   .option('resolve-alias', {
     filter: 'env',
     inHelp: false,
-    mapper: processResolveAlias
+    mapper: processResolveAlias,
   })
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
-    mapper: processEnvTarget
+    mapper: processEnvTarget,
   })
   .option('template', {
     filter: 'env',
     default: path.join(__dirname, 'webpack/template/index.ejs'),
-    description: 'set custom html template'
+    description: 'set custom html template',
   })
   .option('template-title', {
     filter: 'env',
-    description: 'set custom html template title'
+    description: 'set custom html template title',
   })
   .option('template-parameters', {
     filter: 'env',
@@ -123,26 +124,26 @@ cli
     description: 'set html template meta option',
     default: { viewport: 'width=device-width, initial-scale=1' },
     mapper: val => !val ? {} : Object.assign({
-      viewport: 'width=device-width, initial-scale=1'
-    }, JSON.parse(val) || {})
+      viewport: 'width=device-width, initial-scale=1',
+    }, JSON.parse(val) || {}),
   })
   .option('help', { description: 'show webpack-dev-server help' })
 
 cli
   .command('lint', {
     description: 'run eslint',
-    alias: 'eslint'
+    alias: 'eslint',
   }, out => run('eslint')({
     ...out,
     argv: {
       ...out.argv,
-      _: out.argv._.length ? out.argv._ : ['src']
-    }
+      _: out.argv._.length ? out.argv._ : ['src'],
+    },
   }))
   .option('config', {
     overide: require.resolve('./eslint'),
-    alias:'c',
-    inHelp: false
+    alias: 'c',
+    inHelp: false,
   })
   .option('ext', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
@@ -164,7 +165,7 @@ cli
       s: 'source-maps',
       w: 'watch',
       x: 'extensions',
-    }
+    },
   }, run('babel'))
   .option('presets', {
     inHelp: false,
@@ -181,7 +182,7 @@ cli
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
-    mapper: processEnvTarget
+    mapper: processEnvTarget,
   })
   .option('modules', {
     description: 'env preset modules option',
@@ -198,7 +199,7 @@ cli
   }, run('postcss'))
   .option('config', {
     overide: require.resolve('./postcss'),
-    inHelp: false
+    inHelp: false,
   })
   .option('minimize', { description: 'minimize css', filter: 'env' })
   .option('help', { description: 'show postcss-cli help' })

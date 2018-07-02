@@ -12,10 +12,10 @@ const cssLoader = (extract, opts = {}, after = []) => extract({
     loader: require.resolve('postcss-loader'),
     options: {
       config: {
-        path: path.dirname(require.resolve('../../postcss'))
-      }
+        path: path.dirname(require.resolve('../../postcss')),
+      },
     },
-  }].concat(after)
+  }].concat(after),
 })
 const sassLoader = (extract, opts = {}, after = []) =>
   cssLoader(extract, opts, [require.resolve('sass-loader')].concat(after))

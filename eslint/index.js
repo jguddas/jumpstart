@@ -2,7 +2,7 @@ const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2017,

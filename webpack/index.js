@@ -1,4 +1,3 @@
-const path = require('path')
 const fileRules = require('./rules/file')
 const styleRules = require('./rules/style')
 const babelRules = require('./rules/babel')
@@ -7,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const { DefinePlugin, ProvidePlugin } = require('webpack')
+const { ProvidePlugin } = require('webpack')
 
 module.exports = (env, { mode, contentBase }) => {
   const argv = JSON.parse(process.env.JUMPSTART || '{}')
@@ -15,7 +14,7 @@ module.exports = (env, { mode, contentBase }) => {
 
   const plugins = [
     new ExtractTextPlugin({
-      filename: argv['output-css-filename'] || 'style.css',
+      filename: argv['output-css-filename'],
       disable: !argv['extract-css'],
     }),
   ].concat(!argv['caching'] ? [] : [
@@ -28,7 +27,7 @@ module.exports = (env, { mode, contentBase }) => {
         './template/serviceWorker.js'
       ) : require.resolve(
         './template/dummyServiceWorker.js'
-      )
+      ),
     }),
   ]).concat(!argv['template'] ? [] : [
     new HtmlWebpackPlugin({
@@ -38,16 +37,16 @@ module.exports = (env, { mode, contentBase }) => {
       templateParameters: {
         title: argv['template-title'],
         ...argv['template-parameters'],
-      }
+      },
     }),
   ]).concat(!contentBase ? [] : [
-    new CopyWebpackPlugin([contentBase])
-  ]).concat(!argv.progress ? [] :
+    new CopyWebpackPlugin([contentBase]),
+  ]).concat(!argv['progress'] ? [] :
     new LogPlugin(() => production && process.stderr.clearLine())
   )
   const rules = [
     ...fileRules(),
-    ...babelRules({ pragma: argv.pragma }),
+    ...babelRules(),
     ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
   const extensions = ['.js', '.jsx', '.lsc', '.lsx']
