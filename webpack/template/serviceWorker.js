@@ -1,7 +1,7 @@
 export function register(config) {
   if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
+      navigator.serviceWorker.register(`${PUBLIC_URL}service-worker.js`)
         .then(registration => {
           registration.onupdatefound = () => {
             const installingWorker = registration.installing
