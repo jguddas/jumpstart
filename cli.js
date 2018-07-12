@@ -52,6 +52,18 @@ cli
     filter: 'env',
     description: 'add precache module and helper',
   })
+  .option('plugins', {
+    filter: 'env',
+    default: [],
+    description: 'babel plugins',
+    mapper: val => val.split(','),
+  })
+  .option('presets', {
+    filter: 'env',
+    default: [],
+    description: 'babel presets',
+    mapper: val => val.split(','),
+  })
   .option('template', {
     filter: 'env',
     default: path.join(__dirname, 'webpack/template/index.ejs'),
@@ -105,6 +117,18 @@ cli
   .option('caching', {
     filter: 'env',
     description: 'add dummy precache module helper',
+  })
+  .option('plugins', {
+    filter: 'env',
+    default: [],
+    description: 'babel plugins',
+    mapper: val => val.split(','),
+  })
+  .option('presets', {
+    filter: 'env',
+    default: [],
+    description: 'babel presets',
+    mapper: val => val.split(','),
   })
   .option('resolve-alias', {
     filter: 'env',

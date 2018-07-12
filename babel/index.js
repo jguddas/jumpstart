@@ -10,12 +10,16 @@ module.exports = (context, opts = {}) => {
     }, opts, {
       modules: argv['modules'],
       targets: argv['env-target'] || opts.targets || {},
-    }),
+    }).concat(
+      argv['presets']
+    ),
     plugins: addOpts(
       'babel-plugin-transform-class-properties',
       'babel-plugin-transform-object-rest-spread',
       'babel-plugin-transform-react-jsx',
       'babel-plugin-syntax-dynamic-import',
-    )({ useBuiltIns: true, pragma: argv['pragma'] }, opts),
+    )({ useBuiltIns: true, pragma: argv['pragma'] }, opts).concat(
+      argv['plugins'],
+    ),
   }
 }
