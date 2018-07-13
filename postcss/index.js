@@ -32,7 +32,7 @@ module.exports = ({ file, options }) => {
     ...options,
     map,
     parser,
-    plugins: [
+    plugins: argv['css-plugins'] === false ? [] : [
       require('autoprefixer')(),
       argv.minimize && require('cssnano')(),
     ].concat(argv['css-plugins'].map(val => {

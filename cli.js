@@ -68,7 +68,7 @@ cli
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val.split(','),
+    mapper: val => val === false ? false : val.split(','),
   })
   .option('template', {
     filter: 'env',
@@ -140,7 +140,7 @@ cli
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val.split(','),
+    mapper: val => val === false ? false : val.split(','),
   })
   .option('resolve-alias', {
     filter: 'env',
@@ -262,7 +262,7 @@ cli
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val.split(','),
+    mapper: val => val === false ? false : val.split(','),
   })
   .option('help', { description: 'show postcss-cli help' })
 

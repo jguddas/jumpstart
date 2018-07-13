@@ -1,4 +1,5 @@
 const path = require('path')
+const argv = JSON.parse(process.env.JUMPSTART || '{}')
 const cssLoader = (extract, opts = {}, after = []) => extract({
   fallback: require.resolve('style-loader'),
   use: [{
@@ -8,14 +9,14 @@ const cssLoader = (extract, opts = {}, after = []) => extract({
       localIdentName: opts.modules && '[local]-[hash:base64:5]',
       ...opts,
     },
-  }, {
+  }].concat(argv['css-plugins'] === false ? [] : {
     loader: require.resolve('postcss-loader'),
     options: {
       config: {
         path: path.dirname(require.resolve('../../postcss')),
       },
     },
-  }].concat(after),
+  }).concat(after),
 })
 const sassLoader = (extract, opts = {}, after = []) =>
   cssLoader(extract, opts, [require.resolve('sass-loader')].concat(after))
