@@ -64,6 +64,12 @@ cli
     description: 'babel presets',
     mapper: val => val.split(','),
   })
+  .option('css-plugins', {
+    filter: 'env',
+    default: [],
+    description: 'postcss plugins',
+    mapper: val => val.split(','),
+  })
   .option('template', {
     filter: 'env',
     default: path.join(__dirname, 'webpack/template/index.ejs'),
@@ -128,6 +134,12 @@ cli
     filter: 'env',
     default: [],
     description: 'babel presets',
+    mapper: val => val.split(','),
+  })
+  .option('css-plugins', {
+    filter: 'env',
+    default: [],
+    description: 'postcss plugins',
     mapper: val => val.split(','),
   })
   .option('resolve-alias', {
@@ -246,6 +258,12 @@ cli
     inHelp: false,
   })
   .option('minimize', { description: 'minimize css', filter: 'env' })
+  .option('css-plugins', {
+    filter: 'env',
+    default: [],
+    description: 'postcss plugins',
+    mapper: val => val.split(','),
+  })
   .option('help', { description: 'show postcss-cli help' })
 
 if (!cli.parse()) cli.showHelp(require('./package.json'))

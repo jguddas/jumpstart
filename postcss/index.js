@@ -1,3 +1,4 @@
+const resolve = require('resolve')
 const postcss = require('postcss')
 const path = require('path')
 const sass = require('node-sass')
@@ -34,6 +35,8 @@ module.exports = ({ file, options }) => {
     plugins: [
       require('autoprefixer')(),
       argv.minimize && require('cssnano')(),
-    ],
+    ].concat(argv['css-plugins'].map(val => {
+      return require(resolve.sync(val, { basedir: process.cwd() }))()
+    })),
   }
 }
