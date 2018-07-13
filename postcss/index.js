@@ -33,7 +33,6 @@ module.exports = ({ file, options }) => {
     parser,
     plugins: [
       require('autoprefixer')(),
-      require('postcss-short')(),
       argv.minimize && require('cssnano')(),
     ],
   }
