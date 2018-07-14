@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const { spawn } = require('child_process')
+const minimist = require('minimist')
 const oargs = require('oargs')
 const combon = require('combon')
 const json5 = require('json5')
@@ -267,7 +268,9 @@ cli
   })
   .option('help', { description: 'show postcss-cli help' })
 
-if (!cli.parse()) cli.showHelp(require('./package.json'))
+if (!cli.parse(minimist(process.argv.slice(2), { boolean: true }))) {
+  cli.showHelp(require('./package.json'))
+}
 
 function transformString(str) {
   try {
