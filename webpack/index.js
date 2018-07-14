@@ -1,3 +1,4 @@
+const path = require('path')
 const fileRules = require('./rules/file')
 const styleRules = require('./rules/style')
 const babelRules = require('./rules/babel')
@@ -53,7 +54,10 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
     ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
   const extensions = ['.js', '.jsx', '.lsc', '.lsx']
-  const alias = argv['resolve-alias']
+  const alias = {
+    webpack: path.dirname(require.resolve('webpack/package.json')),
+    ...argv['resolve-alias'],
+  }
 
   return {
     plugins,
