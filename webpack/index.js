@@ -53,11 +53,9 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
     ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
   const extensions = ['.js', '.jsx', '.lsc', '.lsx']
-  const devtool = !production && 'cheap-source-map'
   const alias = argv['resolve-alias']
 
   return {
-    devtool,
     plugins,
     module: { rules },
     resolve: { extensions, alias },
