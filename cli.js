@@ -117,6 +117,7 @@ cli
   .option('progress', { default: true, filter: 'env', inHelp: false })
   .option('quiet', { default: true, inHelp: false })
   .option('devtool', { default: 'cheap-source-map', inHelp: false })
+  .option('hot', { default: true, inHelp: false })
   .option('extract-css', {
     default: false,
     filter: 'env',
