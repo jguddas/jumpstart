@@ -118,6 +118,11 @@ cli
   .option('quiet', { default: true, inHelp: false })
   .option('devtool', { default: 'cheap-source-map', inHelp: false })
   .option('hot', { default: true, inHelp: false })
+  .option('overlay', {
+    default: false,
+    filter: 'env',
+    description: 'show error overlay in the browser',
+  })
   .option('extract-css', {
     default: false,
     filter: 'env',

@@ -58,10 +58,12 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
     webpack: path.dirname(require.resolve('webpack/package.json')),
     ...argv['resolve-alias'],
   }
+  const overlay = argv['overlay']
 
   return {
     plugins,
     module: { rules },
     resolve: { extensions, alias },
+    devServer: { overlay }
   }
 }
