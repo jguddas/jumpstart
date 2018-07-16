@@ -1,4 +1,4 @@
-export function register(config) {
+export function register(config = {}) {
   if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register(`${PUBLIC_URL}service-worker.js`)
