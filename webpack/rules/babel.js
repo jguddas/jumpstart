@@ -1,20 +1,23 @@
+const jsLoader = opts => ({
+  loader: require.resolve('babel-loader'),
+  options: { presets: require.resolve('../../babel'), ...opts },
+})
 module.exports = () => {
   return [{
     test: /\.jsx?$/,
-    exclude: /node_modules/,
-    use: {
-      loader: require.resolve('babel-loader'),
-      options: { presets: require.resolve('../../babel') },
-    },
+    oneOf: [
+      {
+        resourceQuery: /include/,
+        use: jsLoader(),
+      }, {
+        exclude: /node_modules/,
+        use: jsLoader(),
+      },
+    ],
   }, {
     test: /\.ls[cx]?$/,
-    exclude: /node_modules/,
-    use: {
-      loader: require.resolve('babel-loader'),
-      options: {
-        presets: require.resolve('../../babel'),
-        plugins: require.resolve('@oigroup/babel-plugin-lightscript'),
-      },
-    },
+    use: jsLoader({
+      plugins: require.resolve('@oigroup/babel-plugin-lightscript'),
+    }),
   }]
 }
