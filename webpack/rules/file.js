@@ -1,7 +1,11 @@
+const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = () => {
   return [{
     test: /\.(png|jpe?g|svg|woff2?|ttf|eot)$/,
-    loader: require.resolve('url-loader'),
-    options: { limit: 8000 },
+    loader: argv['inline-limit'] === true
+      ? require.resolve('file-loader') : require.resolve('url-loader'),
+    options: {
+      limit: argv['inline-limit'] === null ? undefined : argv['inline-limt']
+    },
   }]
 }

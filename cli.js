@@ -44,6 +44,12 @@ cli
     default: 'style.css',
     filter: 'env',
   })
+  .option('inline-limit', {
+    default: 8000,
+    filter: 'env',
+    mapper: val => val === 0 ? true : val === false ? null : val,
+    description: 'url-loader inline limit, defaults to 8000',
+  })
   .option('extract-css', {
     default: true,
     filter: 'env',
@@ -122,6 +128,12 @@ cli
     default: false,
     filter: 'env',
     description: 'show error overlay in the browser',
+  })
+  .option('inline-limit', {
+    default: 8000,
+    filter: 'env',
+    mapper: val => val === 0 ? true : val === false ? null : val,
+    description: 'url-loader inline limit, defaults to 8000',
   })
   .option('extract-css', {
     default: false,
