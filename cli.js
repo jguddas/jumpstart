@@ -290,14 +290,19 @@ if (!cli.parse(minimist(process.argv.slice(2), { boolean: true }))) {
   cli.showHelp(require('./package.json'))
 }
 
-function transformString(str) {
-  try {
-    return json5.parse(str)
-  } catch (e) {
+function transformString(str, filter, type = 'Object') {
+  const val = ([
+    () => json5.parse(str),
+    () => json5.parse(`{${str}}`),
+    () => combon.parse(str),
+  ].reduce((acc, fn, idx) => {
+    if (acc) return acc
     try {
-      return json5.parse(`{${str}}`)
-    } catch (e) {
-      return combon.parse(str)
-    }
-  }
+      const val = fn()
+      if (val.constructor.name === type) return val
+    } catch (e) {}
+  }, undefined))
+  if (val) return val
+  console.error(`could not parse "${str}"`)
+  process.exit(1)
 }
