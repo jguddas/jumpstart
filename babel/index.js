@@ -1,3 +1,4 @@
+const resolve = require('resolve')
 const addOpts = (...x) => (...opts) => x
   .map(val => [require.resolve(val), Object.assign({}, ...opts)])
 
@@ -11,7 +12,12 @@ module.exports = (context, opts = {}) => {
       modules: argv['modules'],
       targets: argv['env-target'] || opts.targets || {},
     }).concat(
-      argv['presets'] || []
+      (argv['presets'] || []).map(val => {
+        if (typeof val === 'object') {
+          return [resolve.sync(val[0], { basedir: process.cwd() }), val[1]]
+        }
+        return resolve.sync(val, { basedir: process.cwd() })
+      }),
     ),
     plugins: addOpts(
       'babel-plugin-transform-class-properties',
@@ -19,7 +25,12 @@ module.exports = (context, opts = {}) => {
       'babel-plugin-transform-react-jsx',
       'babel-plugin-syntax-dynamic-import',
     )({ useBuiltIns: true, pragma: argv['pragma'] }, opts).concat(
-      argv['plugins'] || [],
+      (argv['plugins'] || []).map(val => {
+        if (typeof val === 'object') {
+          return [resolve.sync(val[0], { basedir: process.cwd() }), val[1]]
+        }
+        return resolve.sync(val, { basedir: process.cwd() })
+      }),
     ),
   }
 }
