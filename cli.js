@@ -64,19 +64,19 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val.split(','),
+    mapper: val => transformString(val, null, 'Array'),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val.split(','),
+    mapper: val => transformString(val, null, 'Array'),
   })
   .option('css-plugins', {
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? false : val.split(','),
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('template', {
     filter: 'env',
@@ -149,19 +149,19 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val.split(','),
+    mapper: val => transformString(val, null, 'Array'),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val.split(','),
+    mapper: val => transformString(val, null, 'Array'),
   })
   .option('css-plugins', {
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? false : val.split(','),
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('resolve-alias', {
     filter: 'env',
@@ -246,13 +246,19 @@ cli
   }, run('babel'))
   .option('presets', {
     inHelp: false,
-    default: require.resolve('./babel'),
-    mapper: val => require.resolve('./babel') + ',' + val,
+    defaults: { default: require.resolve('./babel') },
+    filter: ['default', 'env'],
+    mapper: (val, filter) => {
+      if (filter == 'default') return require.resolve('./babel')
+      return transformString(val, null, 'Array')
+    },
   })
   .option('plugins', {
     inHelp: false,
-    default: require.resolve('@oigroup/babel-plugin-lightscript'),
-    mapper: x => require.resolve('@oigroup/babel-plugin-lightscript') + ',' + x,
+    filter: 'env',
+    default: [require.resolve('@oigroup/babel-plugin-lightscript')],
+    mapper: val => transformString(val, null, 'Array')
+      .concat([require.resolve('@oigroup/babel-plugin-lightscript')]),
   })
   .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
@@ -283,7 +289,7 @@ cli
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? false : val.split(','),
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('help', { description: 'show postcss-cli help' })
 
