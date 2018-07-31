@@ -64,13 +64,13 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => transformString(val, null, 'Array'),
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => transformString(val, null, 'Array'),
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('css-plugins', {
     filter: 'env',
@@ -149,13 +149,13 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => transformString(val, null, 'Array'),
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => transformString(val, null, 'Array'),
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('css-plugins', {
     filter: 'env',
@@ -250,6 +250,7 @@ cli
     filter: ['default', 'env'],
     mapper: (val, filter) => {
       if (filter == 'default') return require.resolve('./babel')
+      if (val === false) return false
       return transformString(val, null, 'Array')
     },
   })
@@ -257,7 +258,7 @@ cli
     inHelp: false,
     filter: 'env',
     default: [require.resolve('@oigroup/babel-plugin-lightscript')],
-    mapper: val => transformString(val, null, 'Array')
+    mapper: val => val === false ? false : transformString(val, null, 'Array')
       .concat([require.resolve('@oigroup/babel-plugin-lightscript')]),
   })
   .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })

@@ -5,7 +5,7 @@ const addOpts = (...x) => (...opts) => x
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = (context, opts = {}) => {
   return {
-    presets: addOpts('babel-preset-env')({
+      presets: argv['presets'] === false ? [] : addOpts('babel-preset-env')({
       modules: false,
       loose: true,
     }, opts, {
@@ -19,7 +19,7 @@ module.exports = (context, opts = {}) => {
         return resolve.sync(val, { basedir: process.cwd() })
       }),
     ),
-    plugins: addOpts(
+    plugins: argv['plugins'] === false ? [] : addOpts(
       'babel-plugin-transform-class-properties',
       'babel-plugin-transform-object-rest-spread',
       'babel-plugin-transform-react-jsx',
