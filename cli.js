@@ -4,6 +4,7 @@ const minimist = require('minimist')
 const oargs = require('oargs')
 const combon = require('combon')
 const json5 = require('json5')
+const fs = require('fs')
 const path = require('path')
 
 const run = command => ({ mapped, argv }) => spawn(
@@ -291,10 +292,22 @@ if (!cli.parse(minimist(process.argv.slice(2), { boolean: true }))) {
 }
 
 function transformString(str, filter, type = 'Object') {
+  const [_str, _path] = str.includes('?') ? str.split(/\?(.*)/) : []
+  const get = val => _path.split('.').reduce((acc, key) => acc[key], val)
   const val = ([
     () => json5.parse(str),
     () => json5.parse(`{${str}}`),
+    () => json5.parse(`[${str}]`),
+    () => require(path.resolve(str)),
+    () => require(str),
+    () => json5.parse(fs.readFileSync(path.resolve(str))),
+    () => json5.parse(fs.readFileSync(require.resolve(str))),
+    () => _path && get(require(path.resolve(_str))),
+    () => _path && get(require(_str)),
+    () => _path && get(json5.parse(fs.readFileSync(path.resolve(_str)))),
+    () => _path && get(json5.parse(fs.readFileSync(require.resolve(_str)))),
     () => combon.parse(str),
+    () => str.split(/\s*,\s*/),
   ].reduce((acc, fn, idx) => {
     if (acc) return acc
     try {
