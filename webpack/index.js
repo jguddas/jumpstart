@@ -75,11 +75,12 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
     ...argv['resolve-alias'],
   }
   const overlay = argv['overlay']
+  const after = (app, server) => server.log.info = console.log
 
   return {
     plugins,
     module: { rules },
     resolve: { extensions, alias },
-    devServer: { overlay }
+    devServer: { overlay, after }
   }
 }
