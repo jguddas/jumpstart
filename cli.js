@@ -6,6 +6,7 @@ const combon = require('combon')
 const json5 = require('json5')
 const fs = require('fs')
 const path = require('path')
+const portfinder = require('portfinder')
 
 const run = command => ({ mapped, argv }) => spawn(
   require.resolve(`.bin/${command}`),
@@ -125,9 +126,22 @@ cli
   .command('start', {
     description: 'run webpack-dev-server',
     alias: 'dev',
-  }, run('webpack-dev-server'))
+  }, ({ command, mapped, argv }) => {
+    if (mapped.default.port === null) {
+      portfinder.basePort = 3000
+      portfinder.getPort((err, port) => {
+        run('webpack-dev-server')({
+          command,
+          mapped: { ...mapped, default: { ...mapped.default, port }},
+          argv,
+        })
+      })
+    } else {
+      run('webpack-dev-server')({ command, mapped, argv })
+    }
+  })
   .option('mode', { default: 'development', inHelp: false})
-  .option('port', { default: 3000, inHelp: false })
+  .option('port', { default: null, inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('progress', { default: true, filter: 'env', inHelp: false })
