@@ -41,6 +41,11 @@ cli
     inHelp: false,
     mapper: transformString,
   })
+  .option('provide', {
+    filter: 'env',
+    inHelp: false,
+    mapper: transformString,
+  })
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
@@ -197,6 +202,11 @@ cli
     mapper: transformString,
   })
   .option('define', {
+    filter: 'env',
+    inHelp: false,
+    mapper: transformString,
+  })
+  .option('provide', {
     filter: 'env',
     inHelp: false,
     mapper: transformString,

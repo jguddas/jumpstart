@@ -8,13 +8,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PWAManifestPlugin = require('webpack-pwa-manifest')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const { DefinePlugin ,ProvidePlugin } = require('webpack')
+const { DefinePlugin, ProvidePlugin } = require('webpack')
 
 module.exports = (env, { mode, contentBase, outputPublicPath }) => {
   const argv = JSON.parse(process.env.JUMPSTART || '{}')
   const production = (env || mode) === 'production'
 
-  const plugins = [
+  const plugins = ([
     new DefinePlugin({
       PUBLIC_URL: JSON.stringify(outputPublicPath || ''),
       ...(argv.define || {}),
@@ -23,7 +23,9 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
       filename: argv['output-css-filename'],
       disable: !argv['extract-css'],
     }),
-  ].concat(!argv['caching'] ? [] : [
+  ]).concat(!argv['provide'] ? [] : [
+    new ProvidePlugin(argv['provide']),
+  ]).concat(!argv['caching'] ? [] : [
     new SWPrecacheWebpackPlugin({
       minify: true,
       logger: function() {},
