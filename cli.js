@@ -36,6 +36,11 @@ cli
     inHelp: false,
     mapper: transformString,
   })
+  .option('define', {
+    filter: 'env',
+    inHelp: false,
+    mapper: transformString,
+  })
   .option('env-target', {
     description: 'set env target',
     filter: 'env',
@@ -187,6 +192,11 @@ cli
     mapper: val => val === false ? false : transformString(val, null, 'Array'),
   })
   .option('resolve-alias', {
+    filter: 'env',
+    inHelp: false,
+    mapper: transformString,
+  })
+  .option('define', {
     filter: 'env',
     inHelp: false,
     mapper: transformString,

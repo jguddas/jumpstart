@@ -16,7 +16,8 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
 
   const plugins = [
     new DefinePlugin({
-      PUBLIC_URL: JSON.stringify(outputPublicPath || '')
+      PUBLIC_URL: JSON.stringify(outputPublicPath || ''),
+      ...(argv.define || {}),
     }),
     new ExtractTextPlugin({
       filename: argv['output-css-filename'],
