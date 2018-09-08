@@ -5,7 +5,7 @@ const babelLoader = opts => ({
   options: opts,
 })
 
-const oneOf = opts => opts ? [
+const oneOf = (opts = {}) => [
   { // include = preset
     resourceQuery: /(^\?|&)include($|&)/,
     use: babelLoader({ ...opts, presets: [preset].concat(opts.presets || []) }),
@@ -17,15 +17,6 @@ const oneOf = opts => opts ? [
     use: babelLoader({ ...opts, presets: [preset].concat(opts.presets || []) }),
   }, { // node_modules = no preset
     use: babelLoader(opts),
-  },
-] : [
-  { // include = preset
-    resourceQuery: /(^\?|&)include($|&)/,
-    use: babelLoader({ presets: [preset] }),
-  }, { // not node_modules & not exclude = preset
-    exclude: /node_modules/,
-    resourceQuery: { not: [/(^\?|&)exclude($|&)/] },
-    use: babelLoader({ presets: [preset] }),
   },
 ]
 
