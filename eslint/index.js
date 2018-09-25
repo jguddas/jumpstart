@@ -1,3 +1,5 @@
+const lscConfigs = require('@lightscript/eslint-plugin/lib/configs')
+
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
   extends: [
@@ -5,11 +7,8 @@ module.exports = {
     'plugin:react/recommended',
   ],
   parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: 'module',
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-    },
+    ecmaVersion: 2018,
+    sourceType: 'module'
   },
   settings: {
     react: { pragma: argv.pragma },
@@ -21,7 +20,9 @@ module.exports = {
   overrides: [
     {
       files: ['*.lsc', '*.lsx'],
-      parser: '@oigroup/lightscript-eslint',
+      parser: '@lightscript/eslint-plugin',
+      plugins: ['@lightscript/eslint-plugin'],
+      rules: lscConfigs.recommended.rules,
     }
   ],
 }
