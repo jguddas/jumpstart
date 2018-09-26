@@ -20,7 +20,7 @@ Usage
 -----
 
 ```
-npx jumpstart
+npx jumpstart-cli
 ```
 
 
