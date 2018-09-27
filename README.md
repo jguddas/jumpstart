@@ -33,3 +33,56 @@ jumpstart
 ```
 npx jumpstart-cli
 ```
+
+Examples
+--------
+
+#### Webpack
+
+```sh
+# javascript
+echo "alert('Hello World')" > src/index.js
+
+# lightscript
+echo "alert! 'Hello World'" > src/index.lsc
+
+jumpstart start
+jumpstart bulid
+```
+
+#### ESLint
+```sh
+# javascript
+echo "console.log('Hello World')" > src/example.js
+
+# lightscript
+echo "console.log! 'Hello World'" > src/example.lsc
+
+jumpstart lint
+```
+
+#### Babel
+```sh
+# javascript
+echo "console.log({ ...foo })" > example.js
+jumpstart compile example.js
+
+# lightscript
+echo "console.log! { ...foo }" > example.lsc
+jumpstart compile example.lsc
+```
+
+#### PostCSS
+```sh
+# css
+echo ".foo { bar: baz }" > example.css
+jumpstart css example.css
+
+# sass
+echo ".foo { .bar { baz: qux } }" > example.scss
+jumpstart css example.scss
+
+# less
+echo ".foo { .bar { baz: qux } }" > example.less
+jumpstart css example.less
+```
