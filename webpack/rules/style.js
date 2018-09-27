@@ -7,7 +7,7 @@ const postLoader = [].concat(argv['css-plugins'] === false ? [] : {
   loader: require.resolve('postcss-loader'),
   options: {
     config: {
-      path: path.dirname(require.resolve('../../postcss')),
+      path: path.dirname(require.resolve('../../postcss/basic')),
     },
   },
 })
