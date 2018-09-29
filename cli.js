@@ -262,7 +262,7 @@ cli
     ...out,
     argv: {
       ...out.argv,
-      _: out.argv._.length ? out.argv._ : ['src'],
+      _: out.argv.stdin ? ['--stdin'] : out.argv._.length ? out.argv._ : ['src'],
     },
   }))
   .option('config', {
