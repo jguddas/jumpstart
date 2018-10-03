@@ -9,7 +9,7 @@ module.exports = (context, opts = {}) => {
       modules: false,
       loose: true,
     }, opts, {
-      modules: argv['modules'] || false,
+      modules: argv['modules'] || opts.modules || false,
       targets: argv['env-target'] || opts.targets || {},
     }).concat(
       (argv['presets'] || []).map(val => {
