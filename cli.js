@@ -255,6 +255,43 @@ cli
   .option('help', { description: 'show webpack-dev-server help' })
 
 cli
+  .command('test', {
+    description: 'run jest',
+    alias: 'jest',
+    aliases: {
+      h: 'help',
+      v: 'version',
+      b: 'bail',
+      c: 'config',
+      e: 'expand',
+      w: 'maxWorkers',
+      o: 'onlyChanged',
+      f: 'onlyFailures',
+      i: 'runInBand',
+      t: 'testNamePattern',
+      u: 'updateSnapshot',
+    },
+  }, run('jest'))
+  .option('config', {
+    overide: require.resolve('./jest'),
+    inHelp: false,
+  })
+  .option('pragma', { filter: 'env', description: 'set jsx pragma' })
+  .option('plugins', {
+    filter: 'env',
+    default: [],
+    description: 'babel plugins',
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+  })
+  .option('presets', {
+    filter: 'env',
+    default: [],
+    description: 'babel presets',
+    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+  })
+  .option('help', { description: 'show jest help' })
+
+cli
   .command('lint', {
     description: 'run eslint',
     alias: 'eslint',
@@ -322,7 +359,6 @@ cli
     filter: 'env',
   })
   .option('help', { description: 'show babel-cli help' })
-
 
 cli
   .command('css', {
