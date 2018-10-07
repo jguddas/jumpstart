@@ -38,7 +38,6 @@ Examples
 --------
 
 #### Webpack
-
 ```sh
 # javascript
 echo "alert('Hello World')" > src/index.js
@@ -48,6 +47,17 @@ echo "alert! 'Hello World'" > src/index.lsc
 
 jumpstart start
 jumpstart bulid
+```
+
+#### Jest
+```sh
+# javascript
+echo "it('example', () => expect(4).toBe(3))" > example.test.js
+
+# lightscript
+echo "it! 'example', -> expect(4).toBe(3)" > example.test.lsc
+
+jumpstart test
 ```
 
 #### ESLint
