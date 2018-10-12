@@ -348,9 +348,13 @@ cli
   .option('plugins', {
     inHelp: false,
     filter: 'env',
-    default: [require.resolve('@lightscript/transform')],
-    mapper: val => val === false ? false : transformString(val, null, 'Array')
-      .concat([require.resolve('@lightscript/transform')]),
+    default: [require.resolve('@lightscript/transform'),],
+    mapper: val => val === false ? [
+      false,
+      require.resolve('@lightscript/transform'),
+    ] : transformString(val, null, 'Array').concat([
+      require.resolve('@lightscript/transform'),
+    ]),
   })
   .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })

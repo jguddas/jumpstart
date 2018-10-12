@@ -1,6 +1,14 @@
 const resolve = require('resolve')
+
 const addOpts = (...x) => (...opts) => x
   .map(val => [require.resolve(val), Object.assign({}, ...opts)])
+
+const resolvePlugins = plugins => plugins.map(val => {
+  if (typeof val === 'object') {
+    return [resolve.sync(val[0], { basedir: process.cwd() }), val[1]]
+  }
+  return resolve.sync(val, { basedir: process.cwd() })
+})
 
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = (context, opts = {}) => {
@@ -19,17 +27,15 @@ module.exports = (context, opts = {}) => {
         return resolve.sync(val, { basedir: process.cwd() })
       }),
     ),
-    plugins: argv['plugins'] === false ? [] : addOpts(
+    // if argv.plugins.0 is false do not load default plugins
+    plugins: (argv['plugins'] || [])[0] === false ? resolvePlugins(
+      argv['plugins'].slice(1)
+    ) : addOpts(
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-transform-react-jsx',
       '@babel/plugin-syntax-dynamic-import',
     )({ useBuiltIns: true, pragma: argv['pragma'] }, opts).concat(
-      (argv['plugins'] || []).map(val => {
-        if (typeof val === 'object') {
-          return [resolve.sync(val[0], { basedir: process.cwd() }), val[1]]
-        }
-        return resolve.sync(val, { basedir: process.cwd() })
-      }),
+      resolvePlugins(argv['plugins'] || [])
     ),
   }
 }
