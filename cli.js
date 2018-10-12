@@ -348,15 +348,23 @@ cli
   .option('plugins', {
     inHelp: false,
     filter: 'env',
-    default: [require.resolve('@lightscript/transform'),],
+    default: [
+      require.resolve('@lightscript/transform'),
+      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
+    ],
     mapper: val => val === false ? [
       false,
       require.resolve('@lightscript/transform'),
+      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
     ] : transformString(val, null, 'Array').concat([
       require.resolve('@lightscript/transform'),
+      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
     ]),
   })
-  .option('extensions', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
+  .option('extensions', {
+    default: '.js,.jsx,.lsc,.lsx,.ts,.tsx',
+    inHelp: false
+  })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('env-target', {
     description: 'set env target',

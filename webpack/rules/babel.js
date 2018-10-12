@@ -28,4 +28,11 @@ module.exports = () => [{
   oneOf: oneOf({
     plugins: [require.resolve('@lightscript/transform')],
   }),
+}, {
+  test: /\.tsx?$/,
+  oneOf: oneOf({
+    plugins: [
+      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
+    ],
+  }),
 }]

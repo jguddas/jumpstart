@@ -72,7 +72,7 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
     ...babelRules(),
     ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
   ]
-  const extensions = ['.js', '.jsx', '.lsc', '.lsx']
+  const extensions = ['.js', '.jsx', '.lsc', '.lsx', '.ts', '.tsx']
   const alias = {
     webpack: path.dirname(require.resolve('webpack/package.json')),
     ...argv['resolve-alias'],
