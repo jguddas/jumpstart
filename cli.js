@@ -328,13 +328,24 @@ cli
       w: 'watch',
       x: 'extensions',
     },
-  }, out => run('babel')({
-    ...out,
-    argv: {
-      ...out.argv,
-      _: [...out.argv._, '--no-babelrc'],
-    },
-  }))
+  }, out => {
+    if (out.argv._.length) {
+      out.mapped.env.plugins.push(
+        [require.resolve('@lightscript/transform'), { disableFlow: true }],
+        [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
+      )
+    } else if (/\.ls[cx]$/.test(out.mapped.default.filename)) {
+      out.mapped.env.plugins.push(
+        require.resolve('@lightscript/transform')
+      )
+    } else if (/\.tsx?$/.test(out.mapped.default.filename)) {
+      out.mapped.env.plugins.push(
+        [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
+      )
+    }
+    out.argv._.push('--no-babelrc')
+    return run('babel')(out)
+  })
   .option('presets', {
     inHelp: false,
     defaults: { default: require.resolve('./babel') },
@@ -348,18 +359,8 @@ cli
   .option('plugins', {
     inHelp: false,
     filter: 'env',
-    default: [
-      require.resolve('@lightscript/transform'),
-      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
-    ],
-    mapper: val => val === false ? [
-      false,
-      require.resolve('@lightscript/transform'),
-      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
-    ] : transformString(val, null, 'Array').concat([
-      require.resolve('@lightscript/transform'),
-      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
-    ]),
+    default: [],
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array')
   })
   .option('extensions', {
     default: '.js,.jsx,.lsc,.lsx,.ts,.tsx',
