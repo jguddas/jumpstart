@@ -328,7 +328,13 @@ cli
       w: 'watch',
       x: 'extensions',
     },
-  }, run('babel'))
+  }, out => run('babel')({
+    ...out,
+    argv: {
+      ...out.argv,
+      _: [...out.argv._, '--no-babelrc'],
+    },
+  }))
   .option('presets', {
     inHelp: false,
     defaults: { default: require.resolve('./babel') },
