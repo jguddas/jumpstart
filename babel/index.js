@@ -21,7 +21,6 @@ module.exports = (context, opts = {}) => {
     ),
     plugins: argv['plugins'] === false ? [] : addOpts(
       '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-proposal-object-rest-spread',
       '@babel/plugin-transform-react-jsx',
       '@babel/plugin-syntax-dynamic-import',
     )({ useBuiltIns: true, pragma: argv['pragma'] }, opts).concat(
