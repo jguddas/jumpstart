@@ -11,7 +11,10 @@ module.exports = {
     sourceType: 'module'
   },
   settings: {
-    react: { pragma: argv.pragma },
+    react: {
+      pragma: argv['pragma'],
+      version: 'latest',
+    },
   },
   env: {
     node: true,
