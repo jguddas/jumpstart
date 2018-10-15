@@ -23,6 +23,11 @@ module.exports = {
       parser: '@lightscript/eslint-plugin',
       plugins: ['@lightscript/eslint-plugin'],
       rules: lscConfigs.recommended.rules,
+    }, {
+      files: ['*.ts', '*.tsx'],
+      parser: 'typescript-eslint-parser',
+      plugins: ['typescript'],
+      rules: { 'no-undef': 'off' }
     }
   ],
 }

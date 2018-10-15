@@ -307,7 +307,7 @@ cli
     alias: 'c',
     inHelp: false,
   })
-  .option('ext', { default: '.js,.jsx,.lsc,.lsx', inHelp: false })
+  .option('ext', { default: '.js,.jsx,.lsc,.lsx,.ts,.tsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('help', { description: 'show eslint help' })
 
