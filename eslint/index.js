@@ -1,4 +1,7 @@
-const lscConfigs = require('@lightscript/eslint-plugin/lib/configs')
+const universalRules = require('./rules/universal')
+const lightscriptRules = require('./rules/lightscript')
+const typescriptRules = require('./rules/typescript')
+const javascriptRules = require('./rules/javascript')
 
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
@@ -20,17 +23,21 @@ module.exports = {
     node: true,
     browser: true,
   },
+  rules: universalRules,
   overrides: [
     {
       files: ['*.lsc', '*.lsx'],
       parser: '@lightscript/eslint-plugin',
       plugins: ['@lightscript/eslint-plugin'],
-      rules: lscConfigs.recommended.rules,
+      rules: lightscriptRules,
     }, {
       files: ['*.ts', '*.tsx'],
       parser: 'typescript-eslint-parser',
       plugins: ['typescript'],
-      rules: { 'no-undef': 'off' }
+      rules: typescriptRules
+    }, {
+      files: ['*.js', '*.jsx'],
+      rules: javascriptRules
     }
-  ],
+  ]
 }
