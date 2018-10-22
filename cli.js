@@ -164,7 +164,7 @@ cli
     description: 'show error overlay in the browser',
   })
   .option('inline-limit', {
-    default: 8000,
+    default: true,
     filter: 'env',
     mapper: val => val === 0 ? true : val === false ? null : val,
     description: 'url-loader inline limit, defaults to 8000',
