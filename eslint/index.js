@@ -5,24 +5,7 @@ const javascriptRules = require('./rules/javascript')
 
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-  ],
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module'
-  },
-  settings: {
-    react: {
-      pragma: argv['pragma'],
-      version: 'latest',
-    },
-  },
-  env: {
-    node: true,
-    browser: true,
-  },
+  extends: ['airbnb'],
   rules: universalRules,
   overrides: [
     {
