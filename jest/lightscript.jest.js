@@ -12,7 +12,7 @@ module.exports = {
           [require('../babel'), { modules: 'commonjs' }],
         ],
         plugins: [
-          require('@lightscript/transform'),
+          [require.resolve('@lightscript/transform'), { disableFlow: true }],
         ],
       }).code
     }

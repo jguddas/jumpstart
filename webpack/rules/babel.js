@@ -26,7 +26,9 @@ module.exports = () => [{
 }, {
   test: /\.ls[cx]?$/,
   oneOf: oneOf({
-    plugins: [require.resolve('@lightscript/transform')],
+    plugins: [
+      [require.resolve('@lightscript/transform'), { disableFlow: true }],
+    ],
   }),
 }, {
   test: /\.tsx?$/,
