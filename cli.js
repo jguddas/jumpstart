@@ -31,6 +31,10 @@ cli
   .option('mode', { default: 'production', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('progress', { default: true, filter: 'env', inHelp: false })
+  .option('decorator-legacy', {
+    filter: 'env',
+    description: 'use legacy decorators',
+  })
   .option('resolve-alias', {
     filter: 'env',
     inHelp: false,
@@ -158,6 +162,10 @@ cli
   .option('quiet', { default: true, inHelp: false })
   .option('devtool', { default: 'cheap-source-map', inHelp: false })
   .option('hot', { default: true, inHelp: false })
+  .option('decorator-legacy', {
+    filter: 'env',
+    description: 'use legacy decorators',
+  })
   .option('overlay', {
     default: false,
     filter: 'env',
@@ -277,6 +285,10 @@ cli
     inHelp: false,
   })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
+  .option('decorator-legacy', {
+    filter: 'env',
+    description: 'use legacy decorators',
+  })
   .option('plugins', {
     filter: 'env',
     default: [],
@@ -367,6 +379,10 @@ cli
     inHelp: false
   })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
+  .option('decorator-legacy', {
+    filter: 'env',
+    description: 'use legacy decorators',
+  })
   .option('env-target', {
     description: 'set env target',
     filter: 'env',

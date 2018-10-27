@@ -31,10 +31,19 @@ module.exports = (context, opts = {}) => {
     plugins: (argv['plugins'] || [])[0] === false ? resolvePlugins(
       argv['plugins'].slice(1)
     ) : addOpts(
+      '@babel/plugin-proposal-decorators',
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-transform-react-jsx',
       '@babel/plugin-syntax-dynamic-import',
-    )({ useBuiltIns: true, pragma: argv['pragma'] }, opts).concat(
+    )({
+      useBuiltIns: true,
+      pragma: argv['pragma'],
+      legacy: argv['decorator-legacy'],
+    },
+      argv['decorator-legacy'] ? {} : {
+        decoratorsBeforeExport: true,
+      }
+    , opts).concat(
       resolvePlugins(argv['plugins'] || [])
     ),
   }
