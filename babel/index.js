@@ -45,6 +45,8 @@ module.exports = (context, opts = {}) => {
         { pragma: argv['pragma'] }
       ], [
         require.resolve('@babel/plugin-syntax-dynamic-import'),
+      ], [
+        require.resolve('@babel/plugin-proposal-throw-expressions'),
       ]
     ]).concat(
       resolvePlugins(argv['plugins'] || [])
