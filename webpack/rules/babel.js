@@ -27,14 +27,20 @@ module.exports = () => [{
   test: /\.ls[cx]?$/,
   oneOf: oneOf({
     plugins: [
-      [require.resolve('@lightscript/transform'), { disableFlow: true }],
+      [
+        require.resolve('@lightscript/transform'),
+        { disableFlow: true, _decoratorParsing: 'none' },
+      ],
     ],
   }),
 }, {
   test: /\.tsx?$/,
   oneOf: oneOf({
     plugins: [
-      [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
+      [
+        require.resolve('@babel/plugin-transform-typescript'),
+        { isTSX: true },
+      ],
     ],
   }),
 }]

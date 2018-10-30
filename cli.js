@@ -343,12 +343,20 @@ cli
   }, out => {
     if (out.argv._.length) {
       out.mapped.env.plugins.push(
-        [require.resolve('@lightscript/transform'), { disableFlow: true }],
-        [require.resolve('@babel/plugin-transform-typescript'), { isTSX: true }],
+      [
+        require.resolve('@lightscript/transform'),
+        { disableFlow: true, _decoratorParsing: 'none' }
+      ], [
+        require.resolve('@babel/plugin-transform-typescript'),
+        { isTSX: true }
+      ],
       )
     } else if (/\.ls[cx]$/.test(out.mapped.default.filename)) {
       out.mapped.env.plugins.push(
-        require.resolve('@lightscript/transform')
+        [
+          require.resolve('@lightscript/transform'),
+          { disableFlow: true, _decoratorParsing: 'none' },
+        ]
       )
     } else if (/\.tsx?$/.test(out.mapped.default.filename)) {
       out.mapped.env.plugins.push(
