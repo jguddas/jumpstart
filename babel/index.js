@@ -46,6 +46,8 @@ module.exports = (context, opts = {}) => {
       ], [
         require.resolve('@babel/plugin-syntax-dynamic-import'),
       ], [
+        require.resolve('@babel/plugin-proposal-optional-chaining'),
+      ], [
         require.resolve('@babel/plugin-proposal-throw-expressions'),
       ]
     ]).concat(
