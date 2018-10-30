@@ -50,6 +50,9 @@ module.exports = (context, opts = {}) => {
       ], [
         require.resolve('@babel/plugin-proposal-throw-expressions'),
       ], [
+        require.resolve('@babel/plugin-proposal-pipeline-operator'),
+        { proposal: 'minimal' },
+      ], [
         require.resolve('babel-plugin-macros'),
       ]
     ]).concat(
