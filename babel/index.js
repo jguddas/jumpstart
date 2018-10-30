@@ -49,6 +49,8 @@ module.exports = (context, opts = {}) => {
         require.resolve('@babel/plugin-proposal-optional-chaining'),
       ], [
         require.resolve('@babel/plugin-proposal-throw-expressions'),
+      ], [
+        require.resolve('babel-plugin-macros'),
       ]
     ]).concat(
       resolvePlugins(argv['plugins'] || [])
