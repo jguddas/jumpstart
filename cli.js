@@ -79,13 +79,13 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('css-plugins', {
     filter: 'env',
@@ -190,13 +190,13 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('css-plugins', {
     filter: 'env',
@@ -293,13 +293,13 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('help', { description: 'show jest help' })
 
@@ -372,7 +372,7 @@ cli
     filter: ['default', 'env'],
     mapper: (val, filter) => {
       if (filter == 'default') return require.resolve('./babel')
-      if (val === false) return false
+      if (val === false) return [false]
       return transformString(val, null, 'Array')
     },
   })

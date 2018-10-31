@@ -1,6 +1,6 @@
 const resolve = require('resolve')
 
-const resolvePlugins = plugins => plugins.map(val => {
+const resolvePlugins = plugins => plugins.filter(Boolean).map(val => {
   if (typeof val === 'object') {
     return [resolve.sync(val[0], { basedir: process.cwd() }), val[1]]
   }
@@ -10,7 +10,8 @@ const resolvePlugins = plugins => plugins.map(val => {
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = (context, opts = {}) => {
   return {
-    presets: (argv['presets'] === false ? [] : [[
+    // if argv.presets.0 is false do not load default presets
+    presets: ((argv['presets'] || [])[0] === false ? [] : [[
       require.resolve('@babel/preset-env'),
       {
         loose: true,
@@ -18,18 +19,9 @@ module.exports = (context, opts = {}) => {
         modules: argv['modules'] || opts.modules || false,
         targets: argv['env-target'] || opts.targets || {},
       }
-    ]]).concat(
-      (argv['presets'] || []).map(val => {
-        if (typeof val === 'object') {
-          return [resolve.sync(val[0], { basedir: process.cwd() }), val[1]]
-        }
-        return resolve.sync(val, { basedir: process.cwd() })
-      }),
-    ),
+    ]]).concat(resolvePlugins(argv['presets'] || [])),
     // if argv.plugins.0 is false do not load default plugins
-    plugins: ((argv['plugins'] || [])[0] === false ? resolvePlugins(
-      argv['plugins'].slice(1)
-    ) : [
+    plugins: ((argv['plugins'] || [])[0] === false ? [] : [
       [
         require.resolve('@babel/plugin-proposal-decorators'),
         {
@@ -55,8 +47,6 @@ module.exports = (context, opts = {}) => {
       ], [
         require.resolve('babel-plugin-macros'),
       ]
-    ]).concat(
-      resolvePlugins(argv['plugins'] || [])
-    ),
+    ]).concat(resolvePlugins(argv['plugins'] || [])),
   }
 }
