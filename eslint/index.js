@@ -7,6 +7,20 @@ const jestRules = require('./rules/jest')
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
   extends: ['airbnb'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: [
+          '.js',
+          '.jsx',
+          '.lsc',
+          '.lsx',
+          '.tx',
+          '.tsx',
+        ],
+      },
+    },
+  },
   rules: universalRules,
   overrides: [
     {
