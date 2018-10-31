@@ -8,6 +8,9 @@ const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
   extends: ['airbnb'],
   settings: {
+    react: {
+      pragma: argv['pragma'],
+    },
     'import/resolver': {
       node: {
         extensions: [
