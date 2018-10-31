@@ -21,11 +21,20 @@ module.exports = {
       },
     },
   },
+  env: {
+    browser: true,
+    node: true,
+  },
   rules: universalRules,
   overrides: [
     {
       files: ['?(*.)@(test|spec).@(js|jsx|lsc|lsx|ts|tsx)'],
       plugins: ['jest'],
+      env: {
+        browser: true,
+        node: true,
+        jest: true,
+      },
       rules: jestRules,
     }, {
       files: ['*.lsc', '*.lsx'],
