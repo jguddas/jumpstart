@@ -19,7 +19,7 @@ const run = command => ({ mapped, argv }) => spawn(
       JUMPSTART: JSON.stringify(mapped.env || '{}'),
     },
   }
-)
+).on('exit', code => process.exit(code))
 
 const cli = oargs()
 
