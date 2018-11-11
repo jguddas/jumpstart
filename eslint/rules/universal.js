@@ -1,5 +1,4 @@
 module.exports = {
-  semi: 'off',
   strict: 'off',
   'no-console': 'off',
   'react/prop-types': 'off',
