@@ -91,7 +91,7 @@ cli
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('template', {
     filter: 'env',
@@ -202,7 +202,7 @@ cli
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
   })
   .option('resolve-alias', {
     filter: 'env',
