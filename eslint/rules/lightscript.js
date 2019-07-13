@@ -1,7 +1,6 @@
 const lscConfigs = require('@lightscript/eslint-plugin/lib/configs')
 module.exports = {
   ...lscConfigs.recommended.rules,
-  semi: 'off',
   'space-infix-ops': 'off',
   'arrow-parens': ['error', 'as-needed'],
   'arrow-spacing': 'off',
@@ -11,5 +10,7 @@ module.exports = {
   'brace-style': 'off',
   'function-paren-newline': 'off',
   'space-before-blocks': 'off',
+  'no-useless-return': 'off',
+  'padded-blocks': 'off',
   'react/jsx-indent': 'off',
 }
