@@ -70,7 +70,7 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
   const rules = [
     ...fileRules(),
     ...babelRules(),
-    ...styleRules(ExtractTextPlugin.extract, { minimize: production }),
+    ...styleRules(ExtractTextPlugin.extract),
   ]
   const extensions = ['.js', '.jsx', '.lsc', '.lsx', '.ts', '.tsx']
   const alias = {

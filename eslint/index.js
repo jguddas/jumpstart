@@ -46,7 +46,7 @@ module.exports = {
       rules: lightscriptRules,
     }, {
       files: ['*.ts', '*.tsx'],
-      parser: 'typescript-eslint-parser',
+      parser: '@typescript-eslint/parser',
       plugins: ['typescript'],
       rules: typescriptRules
     }, {

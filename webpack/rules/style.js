@@ -18,7 +18,9 @@ const cssLoader = (extract, opts, after) => extract({
     loader: require.resolve('css-loader'),
     options: {
       importLoaders: 1,
-      localIdentName: opts.modules && '[local]-[hash:base64:5]',
+      ...(opts.modules ? {
+        modules: { localIdentName: '[local]-[hash:base64:5]' },
+      } : {}),
       ...opts,
     },
   }].concat(after),
