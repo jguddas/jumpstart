@@ -5,4 +5,5 @@ module.exports = {
   'react/prop-types': 'off',
   'react/jsx-filename-extension': 'off',
   'lines-between-class-members': 'off',
+  'arrow-parens': 'off',
 }
