@@ -14,7 +14,7 @@ module.exports = {
         plugins: [
           [
             require.resolve('@lightscript/transform'),
-            { disableFlow: true, _decoratorParsing: 'none' }
+            { disableFlow: true, _decoratorParsing: 'none' },
           ],
         ],
       }).code

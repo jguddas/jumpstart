@@ -9,7 +9,7 @@ module.exports = {
   extends: ['airbnb'],
   settings: {
     react: {
-      pragma: argv['pragma'],
+      pragma: argv.pragma,
     },
     'import/resolver': {
       node: {
@@ -48,10 +48,10 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
       plugins: ['typescript'],
-      rules: typescriptRules
+      rules: typescriptRules,
     }, {
       files: ['*.js', '*.jsx'],
-      rules: javascriptRules
-    }
-  ]
+      rules: javascriptRules,
+    },
+  ],
 }

@@ -18,7 +18,7 @@ const run = command => ({ mapped, argv }) => spawn(
       ...process.env,
       JUMPSTART: JSON.stringify(mapped.env || '{}'),
     },
-  }
+  },
 ).on('exit', code => process.exit(code))
 
 const cli = oargs()
@@ -63,7 +63,7 @@ cli
   .option('inline-limit', {
     default: 8000,
     filter: 'env',
-    mapper: val => val === 0 ? true : val === false ? null : val,
+    mapper: val => (val === 0 ? true : val === false ? null : val),
     description: 'url-loader inline limit, defaults to 8000',
   })
   .option('extract-css', {
@@ -79,19 +79,19 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('css-plugins', {
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('template', {
     filter: 'env',
@@ -120,9 +120,9 @@ cli
       }
       return {
         viewport: 'width=device-width, initial-scale=1',
-        ...obj
+        ...obj,
       }
-    }
+    },
   })
   .option('manifest-template', {
     filter: 'env',
@@ -146,7 +146,7 @@ cli
       portfinder.getPort((err, port) => {
         run('webpack-dev-server')({
           command,
-          mapped: { ...mapped, default: { ...mapped.default, port }},
+          mapped: { ...mapped, default: { ...mapped.default, port } },
           argv,
         })
       })
@@ -154,7 +154,7 @@ cli
       run('webpack-dev-server')({ command, mapped, argv })
     }
   })
-  .option('mode', { default: 'development', inHelp: false})
+  .option('mode', { default: 'development', inHelp: false })
   .option('port', { default: null, inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
@@ -174,7 +174,7 @@ cli
   .option('inline-limit', {
     default: true,
     filter: 'env',
-    mapper: val => val === 0 ? true : val === false ? null : val,
+    mapper: val => (val === 0 ? true : val === false ? null : val),
     description: 'url-loader inline limit, defaults to 8000',
   })
   .option('extract-css', {
@@ -190,19 +190,19 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('css-plugins', {
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('resolve-alias', {
     filter: 'env',
@@ -251,9 +251,9 @@ cli
       }
       return {
         viewport: 'width=device-width, initial-scale=1',
-        ...obj
+        ...obj,
       }
-    }
+    },
   })
   .option('manifest-template', {
     filter: 'env',
@@ -293,13 +293,13 @@ cli
     filter: 'env',
     default: [],
     description: 'babel plugins',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('presets', {
     filter: 'env',
     default: [],
     description: 'babel presets',
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('help', { description: 'show jest help' })
 
@@ -343,20 +343,20 @@ cli
   }, out => {
     if (out.argv._.length) {
       out.mapped.env.plugins.push(
-      [
-        require.resolve('@lightscript/transform'),
-        { disableFlow: true, _decoratorParsing: 'none' }
-      ], [
-        require.resolve('@babel/plugin-transform-typescript'),
-        { isTSX: true }
-      ],
+        [
+          require.resolve('@lightscript/transform'),
+          { disableFlow: true, _decoratorParsing: 'none' },
+        ], [
+          require.resolve('@babel/plugin-transform-typescript'),
+          { isTSX: true },
+        ],
       )
     } else if (/\.ls[cx]$/.test(out.mapped.default.filename)) {
       out.mapped.env.plugins.push(
         [
           require.resolve('@lightscript/transform'),
           { disableFlow: true, _decoratorParsing: 'none' },
-        ]
+        ],
       )
     } else if (/\.tsx?$/.test(out.mapped.default.filename)) {
       out.mapped.env.plugins.push(
@@ -380,11 +380,11 @@ cli
     inHelp: false,
     filter: 'env',
     default: [],
-    mapper: val => val === false ? [false] : transformString(val, null, 'Array')
+    mapper: val => (val === false ? [false] : transformString(val, null, 'Array')),
   })
   .option('extensions', {
     default: '.js,.jsx,.lsc,.lsx,.ts,.tsx',
-    inHelp: false
+    inHelp: false,
   })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
   .option('decorator-legacy', {
@@ -417,7 +417,7 @@ cli
     filter: 'env',
     default: [],
     description: 'postcss plugins',
-    mapper: val => val === false ? false : transformString(val, null, 'Array'),
+    mapper: val => (val === false ? false : transformString(val, null, 'Array')),
   })
   .option('help', { description: 'show postcss-cli help' })
 
