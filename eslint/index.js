@@ -10,6 +10,7 @@ module.exports = {
   settings: {
     react: {
       pragma: argv.pragma,
+      version: 'latest',
     },
     'import/resolver': {
       node: {
