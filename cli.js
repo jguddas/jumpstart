@@ -319,6 +319,7 @@ cli
     alias: 'c',
     inHelp: false,
   })
+  .option('eslintrc', { default: false, description: 'enable use of configuration from .eslintrc.*' })
   .option('resolve-plugins-relative-to', { default: __dirname, inHelp: false })
   .option('ext', { default: '.js,.jsx,.lsc,.lsx,.ts,.tsx', inHelp: false })
   .option('pragma', { filter: 'env', description: 'set jsx pragma' })
