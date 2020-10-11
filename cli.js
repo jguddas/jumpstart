@@ -71,10 +71,6 @@ cli
     filter: 'env',
     description: 'extract css, defaults to true',
   })
-  .option('caching', {
-    filter: 'env',
-    description: 'add precache module and helper',
-  })
   .option('plugins', {
     filter: 'env',
     default: [],
@@ -181,10 +177,6 @@ cli
     default: false,
     filter: 'env',
     description: 'extract css, defaults to false',
-  })
-  .option('caching', {
-    filter: 'env',
-    description: 'add dummy precache module helper',
   })
   .option('plugins', {
     filter: 'env',

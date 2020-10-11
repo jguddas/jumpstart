@@ -3,7 +3,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PWAManifestPlugin = require('webpack-pwa-manifest')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const { DefinePlugin, ProvidePlugin } = require('webpack')
 const LogPlugin = require('./plugins/log-plugin')
 const babelRules = require('./rules/babel')
@@ -25,18 +24,6 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
     }),
   ]).concat(!argv.provide ? [] : [
     new ProvidePlugin(argv.provide),
-  ]).concat(!argv.caching ? [] : [
-    new SWPrecacheWebpackPlugin({
-      minify: true,
-      logger() {},
-    }),
-    new ProvidePlugin({
-      PRECACHE: production ? require.resolve(
-        './template/serviceWorker.js',
-      ) : require.resolve(
-        './template/dummyServiceWorker.js',
-      ),
-    }),
   ]).concat(!argv.template ? [] : [
     new HtmlWebpackPlugin({
       title: argv.title,
