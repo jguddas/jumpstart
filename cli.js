@@ -120,15 +120,6 @@ cli
       }
     },
   })
-  .option('manifest-template', {
-    filter: 'env',
-    description: 'web app manifest template',
-    mapper: transformString,
-  })
-  .option('manifest-filename', {
-    filter: 'env',
-    description: 'web app manifest filename',
-  })
   .option('config', { overide: require.resolve('./webpack'), inHelp: false })
   .option('help', { description: 'show webpack-cli help' })
 
@@ -246,11 +237,6 @@ cli
         ...obj,
       }
     },
-  })
-  .option('manifest-template', {
-    filter: 'env',
-    description: 'web app manifest template',
-    mapper: transformString,
   })
   .option('help', { description: 'show webpack-dev-server help' })
 
