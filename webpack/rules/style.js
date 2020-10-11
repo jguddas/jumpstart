@@ -1,21 +1,15 @@
-const path = require('path')
-
 const sassLoader = require.resolve('sass-loader')
 const lessLoader = require.resolve('less-loader')
 
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 const postLoader = [].concat(argv['css-plugins'] === false ? [] : {
   loader: require.resolve('postcss-loader'),
-  options: {
-    config: {
-      path: path.dirname(require.resolve('../../postcss/basic')),
-    },
-  },
+  options: { postcssOptions: require('../../postcss/basic') },
 })
 
-const cssLoader = (extract, opts, after) => extract({
-  fallback: require.resolve('style-loader'),
-  use: [{
+const cssLoader = (extract, opts, after) => [
+  extract || require.resolve('style-loader'),
+  {
     loader: require.resolve('css-loader'),
     options: {
       importLoaders: 1,
@@ -24,8 +18,8 @@ const cssLoader = (extract, opts, after) => extract({
       } : {}),
       ...opts,
     },
-  }].concat(after),
-})
+  },
+].concat(after)
 
 const oneOf = (extract, opts, after = []) => [
   { // include & modules = postcss & modules

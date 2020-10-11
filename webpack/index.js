@@ -1,5 +1,5 @@
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { DefinePlugin, ProvidePlugin } = require('webpack')
@@ -17,9 +17,9 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
       PUBLIC_URL: JSON.stringify(outputPublicPath || ''),
       ...(argv.define || {}),
     }),
-    new ExtractTextPlugin({
+  ]).concat(!argv['extract-css'] ? [] : [
+    new MiniCssExtractPlugin({
       filename: argv['output-css-filename'],
-      disable: !argv['extract-css'],
     }),
   ]).concat(!argv.provide ? [] : [
     new ProvidePlugin(argv.provide),
@@ -35,12 +35,13 @@ module.exports = (env, { mode, contentBase, outputPublicPath }) => {
     }),
   ]).concat(!contentBase ? [] : [
     new CopyWebpackPlugin([contentBase]),
-  ]).concat(!argv.progress ? []
-    : new LogPlugin(() => production && process.stderr.clearLine()))
+  ])
+    .concat(!argv.progress ? []
+      : new LogPlugin(() => production && process.stderr.clearLine()))
   const rules = [
     ...fileRules(),
     ...babelRules(),
-    ...styleRules(ExtractTextPlugin.extract),
+    ...styleRules(!argv['extract-css'] ? null : MiniCssExtractPlugin.loader),
   ]
   const extensions = ['.js', '.jsx', '.lsc', '.lsx', '.ts', '.tsx']
   const alias = {

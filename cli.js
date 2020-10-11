@@ -57,7 +57,7 @@ cli
   })
   .option('output-css-filename', {
     description: 'output filename of the extracted css',
-    default: 'style.css',
+    default: '[name].css',
     filter: 'env',
   })
   .option('inline-limit', {
@@ -163,6 +163,11 @@ cli
     filter: 'env',
     mapper: val => (val === 0 ? true : val === false ? null : val),
     description: 'url-loader inline limit, defaults to 8000',
+  })
+  .option('output-css-filename', {
+    description: 'output filename of the extracted css',
+    default: '[name].css',
+    filter: 'env',
   })
   .option('extract-css', {
     default: false,
