@@ -1,6 +1,6 @@
 {
   "name": "jumpstart-cli",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "Config and boilerplate free dev/build tool.",
   "repository": "jguddas/jumpstart",
   "author": "Jakob Guddas",
@@ -65,6 +65,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "files": [
+    ".eslintrc.js",
     "LICENSE",
     "README.md",
     "babel/index.js",
