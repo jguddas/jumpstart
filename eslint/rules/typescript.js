@@ -1,5 +1,6 @@
 module.exports = {
   'no-undef': 'off',
+  'no-use-before-define': 'off',
   '@typescript-eslint/adjacent-overload-signatures': 'error',
   '@typescript-eslint/explicit-function-return-type': [
     'error',
