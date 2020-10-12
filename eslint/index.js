@@ -6,7 +6,10 @@ const jestRules = require('./rules/jest')
 
 const argv = JSON.parse(process.env.JUMPSTART || '{}')
 module.exports = {
-  extends: [require.resolve('eslint-config-airbnb')],
+  extends: [
+    require.resolve('eslint-config-airbnb'),
+    require.resolve('eslint-config-airbnb/hooks'),
+  ],
   settings: {
     react: {
       pragma: argv.pragma,
