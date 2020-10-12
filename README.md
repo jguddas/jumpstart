@@ -123,3 +123,15 @@ jumpstart css example.scss
 echo ".foo { .bar { baz: qux } }" > example.less
 jumpstart css example.less
 ```
+#### MDX
+```sh
+npm i jumpstart-cli babel-loader @mdx-js/loader
+```
+```js
+import React from 'react'
+import { render } from 'react-dom'
+
+import Page from '!babel-loader?configFile=jumpstart-cli/babel!@mdx-js/loader!./page.mdx'
+
+render(<Page/>, document.getElementById('root'))
+```
