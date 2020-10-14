@@ -3,6 +3,11 @@ jumpstart
 
 Config and boilerplate free dev/build tool.
 
+Preview
+----------
+
+![](https://user-images.githubusercontent.com/25524993/96020434-4e5eb680-0e4e-11eb-93a1-1d7b8fdaaf39.gif)
+
 Installation
 ------------
 
